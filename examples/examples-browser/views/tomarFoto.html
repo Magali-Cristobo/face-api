@@ -47,8 +47,8 @@
       <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
       <canvas id="overlay" />
     </div>
-    <div class="rectangle"></div>
-    <button onclick="capture()">Capture</button>
+    <!-- <div class="rectangle"></div> -->
+    <button onclick="capture()" style="display:none;" id="capturar">Capture</button>
     <canvas id="canvas" style="overflow:auto"></canvas>
     </div>  
   <script  src="server.js"></script>
@@ -90,7 +90,13 @@
         if (withBoxes) {
           faceapi.draw.drawDetections(canvas, resizedResult)
         }
-        faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence)
+        if(JSON.stringify(resizedResult.expressions.happy )> 0.95){
+          $('#capturar').get(0).style.display = "block";
+        }
+        else{
+          $('#capturar').get(0).style.display = "none";
+        }
+        // faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence) lo comento pero tb se puede dejar
       }
 
       setTimeout(() => onPlay())
