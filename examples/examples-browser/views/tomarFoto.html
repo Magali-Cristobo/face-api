@@ -168,9 +168,14 @@
       var video = document.querySelector("video");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      canvas
+       canvas
         .getContext("2d")
         .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      let image = canvas.toDataURL('image/jpeg');
+      localStorage.setItem("imagen", image);
+      location.href="http://localhost:3000/fotoCapturada.html";
+
+ 
     
       /** Code to merge image **/
       /** For instance, if I want to merge a play image on center of existing image **/
@@ -190,7 +195,7 @@
     /** End **/
   }
   
-  capture();
+   //capture(); 
   
   
   // video.addEventListener('play', () => {
