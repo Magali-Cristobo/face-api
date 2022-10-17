@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -34,5 +36,28 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>   
     <script  src="script.js"></script>
-    </body>
+    
+   
+    <script>
+        $(document).ready(function() {
+            
+            insertarImagen()
+          })
+
+    function insertarImagen(){
+        console.log("entre f");
+       if(localStorage.getItem("imagen") != null){
+        document.getElementById('1').
+    getElementsByTagName("img")[0].src=localStorage.getItem("imagen");
+       }
+
+          //  var img = document.createElement("img");
+     // img.src = localStorage.getItem("imagen");
+     // var src = document.getElementById("imagenCapturada");
+     // src.appendChild(img);
+     
+      d
+          }
+    </script>
+</body>
 </html>
