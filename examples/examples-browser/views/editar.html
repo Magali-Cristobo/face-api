@@ -26,7 +26,7 @@
     }
     .flexbox {
       display: flex;
-      flew-wrap: wrap;
+      /* flew-wrap: wrap; */
       justify-content: center;
       align-items: center;
     }
@@ -44,6 +44,10 @@
         background-size: cover !important;
         border:0;
       }
+
+    /*.sidebar{
+        width:400px;
+    }*/
     
     .center{
         text-align:center;
@@ -74,12 +78,13 @@
 
     </div>
     <div class="col s3"></div>
+      <!-- <div class="rectangle"></div> -->
     </div>   
     <div class="row">
       <div class="col s3"></div>
       <div class="col s6">
         <div class="center">
-          <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
+          <button class="boton" onclick="capture()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capture()" style="background: url('circulo.png')" id="capturar"></button> 
           <button class="boton" onclick="capture()" style="background: url('saltar.png')" id="saltar"></button>  
         </div>
@@ -92,6 +97,9 @@
   <script  src="server.js"></script>
   </body>
   <script>
+    
+    var a = localStorage.url;
+    console.log(a);
     let forwardTimes = []
     let withBoxes = true
 
@@ -159,19 +167,13 @@
     })
     
     function capture() {
-      localStorage.setItem("cantImagenes",parseInt(localStorage.getItem("cantImagenes")+1));
       var canvas = document.getElementById("canvas");
       var video = document.querySelector("video");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-       canvas
+      canvas
         .getContext("2d")
         .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-      let image = canvas.toDataURL('image/jpeg');
-      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
-      console.log("imagen"+ parseInt(localStorage.getItem("idImagen")));
-      location.href="http://localhost:3000/editar";
- 
     
       /** Code to merge image **/
       /** For instance, if I want to merge a play image on center of existing image **/
@@ -186,16 +188,43 @@
         canvas.toBlob() = (blob) => {
           const img = new Image();
           img.src = window.URL.createObjectUrl(blob);
+          console.log(img.src);
+          localStorage.setItem("url", img.src);
         };
       };
     /** End **/
-   
   }
-  function cancelar(){
-    // ver si queremos que si toca cancelar se borre si ya la saco, seria agregarle lo de fotoCapturada nomas
-      location.href="http://localhost:3000/";
-    }
-  //  capture(); 
+  
+  capture();
+  
+  
+  // video.addEventListener('play', () => {
+  //   const canvas = faceapi.createCanvasFromMedia(video)
+  //   document.body.append(canvas)
+  //   const displaySize = { width: video.width, height: video.height }
+  
+  //    faceapi.matchDimensions(canvas, displaySize)
+  //   setInterval(async () => {
+  //     const detections = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
+  //     const resizedDetections = faceapi.resizeResults(detections, displaySize)
+  //     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+  //      faceapi.draw.drawDetections(canvas, resizedDetections)
+  //     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
+  //     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+  //     console.log(resizedDetections.length + resizedDetections[0].detection.score + resizedDetections[0].expressions.happy )
+  //     if (resizedDetections.length > 0 && resizedDetections[0].detection.score > 0.7 && resizedDetections[0].expressions.happy > 0.5) {
+  //       const canvas = document.createElement('canvas');
+  //           canvas.width = video.videoWidth;
+  //           canvas.height = video.videoHeight;
+  //           canvas.getContext('2d').drawImage(video, 0, 0);
+        
+  //           const img = document.createElement("img");
+  //           img.src = canvas.toDataURL('image/webp');
+  //           console.log(img)
+  //           document.getElementById('screenshot').appendChild(img)
+  //     }
+  //   }, 100)
+  // })
   </script>
 </body>
 </html

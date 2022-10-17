@@ -27,36 +27,51 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-3 columna" id="1"><img id="imagen" class="imagen" src="img.jpg" onclick="openImg()"></div>
-            <div class="col-3 columna" id="2"><img class="imagen" src="img.jpg"></div>
-            <div class="col-3 columna" id="3"><img class="imagen" src="img.jpg"></div>
+            <div class="col-3 columna" id="1"><img id="imagen" class="imagen" src="img.jpg" onclick="openImg(1)"></div>
+            <div class="col-3 columna" id="2"><img class="imagen" src="img.jpg" onclick="openImg(2)"></div>
+            <div class="col-3 columna" id="3"><img class="imagen" src="img.jpg" onclick="openImg(3)"></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>   
-    <script  src="script.js"></script>
+    <!-- <script  src="script.js"></script> -->
     
    
     <script>
+        function openImg(id){
+            console.log(id);
+            localStorage.setItem("idImagen",id);
+            window.location.href = "http://localhost:3000/capturar"; // ta medio raro esto pero para probar
+        }
         $(document).ready(function() {
-            
+            localStorage.setItem("cantImagenes",0);
             insertarImagen()
           })
 
     function insertarImagen(){
+        var i = 0;
+        var idImagen = 0;
+        while (i < document.getElementsByClassName("columna").length){
+            idImagen = parseInt(document.getElementsByClassName("columna")[i].id)
+            console.log(document.getElementsByClassName("columna")[i].id);
+            if(localStorage.getItem("imagen"+ idImagen ) != null){
+                console.log(document.getElementsByClassName("columna")[i].firstChild.src);
+                document.getElementsByClassName("columna")[i].firstChild.src=localStorage.getItem("imagen"+idImagen);
+            }
+            i++;
+        }
+        console.log(document.getElementsByClassName("columna"));
         console.log("entre f");
        if(localStorage.getItem("imagen") != null){
-        document.getElementById('1').
-    getElementsByTagName("img")[0].src=localStorage.getItem("imagen");
+            document.getElementById('1').getElementsByTagName("img")[0].src=localStorage.getItem("imagen");
        }
 
           //  var img = document.createElement("img");
      // img.src = localStorage.getItem("imagen");
      // var src = document.getElementById("imagenCapturada");
      // src.appendChild(img);
-     
-      d
+    
           }
     </script>
 </body>
