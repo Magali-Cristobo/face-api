@@ -53,11 +53,15 @@
         margin-left:30px;
         margin-right:30px; 
     }
+    .fila{
+      display: flex;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="row"> 
+    <div class="row fila"> 
       <div class="col s3"></div>
       <div class="col s6">
       <div style="position: relative; overflow: auto" id="imagenCapturada" class="">
@@ -71,7 +75,7 @@
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capture()" style="background: url('recortar.png')" id="recortar"></button> 
-          <button class="boton" onclick="capture()" style="background: url('rotar.png')" id="rotar"></button>  
+          <button class="boton" onclick="rotar()" style="background: url('rotar.png')" id="rotar"></button>  
           <button class="boton" onclick="location.href='index.html';" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
       </div>
@@ -81,13 +85,19 @@
   <script  src="server.js"></script>
   </body>
   <script>
+    var rotacion = 0;
     var idImagen = parseInt(localStorage.getItem("idImagen"));
     $(document).ready(function() {
       insertarImagen()
     })
-
+    function rotar(){
+      rotacion+=90
+      const rotated = document.getElementById('imagen');
+      rotated.style.rotate = rotacion+'deg';  
+    }
     function insertarImagen(){
       var img = document.createElement("img");
+      img.id = "imagen";
       img.src = localStorage.getItem("imagen"+idImagen);
       console.log("imagen"+idImagen);
       var src = document.getElementById("imagenCapturada");
@@ -97,7 +107,7 @@
     function cancelar(){
       localStorage.removeItem("imagen"+idImagen);
       localStorage.setItem("cantImagenes",parseInt(localStorage.getItem("cantImagenes")-1));
-      location.href="http://localhost:3000/";
+      location.href="http://localhost:3000/capturar";
     }
   </script>
 </body>
