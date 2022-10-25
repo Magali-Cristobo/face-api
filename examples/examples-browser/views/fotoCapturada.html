@@ -76,7 +76,7 @@
           <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capture()" style="background: url('recortar.png')" id="recortar"></button> 
           <button class="boton" onclick="rotar()" style="background: url('rotar.png')" id="rotar"></button>  
-          <button class="boton" onclick="location.href='index.html';" style="background: url('aceptar.png')" id="aceptar"></button> 
+          <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
       </div>
       <div class="col s3"></div> 
@@ -92,9 +92,22 @@
     })
     function rotar(){
       rotacion+=90
-      const rotated = document.getElementById('imagen');
-      rotated.style.rotate = rotacion+'deg';  
+      const img = document.getElementById('imagen');
+      img.style.rotate = rotacion+'deg';  
     }
+    function aceptar(){
+      var canvas = document.createElement("canvas");
+      var img = document.querySelector("img");
+      console.log(img.style.rotate);
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      let image = canvas.toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ idImagen, image);
+      location.href="http://localhost:3000/";
+
+    }
+
     function insertarImagen(){
       var img = document.createElement("img");
       img.id = "imagen";
