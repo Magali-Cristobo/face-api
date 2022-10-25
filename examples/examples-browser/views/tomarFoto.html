@@ -70,7 +70,7 @@
         <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
         <canvas id="overlay">
       </div>
-      <img class="silueta" src="contorno.png"/>
+      <img class="silueta" id="referencia" src=""/>
 
     </div>
     <div class="col s3"></div>
@@ -92,6 +92,18 @@
   <script  src="server.js"></script>
   </body>
   <script>
+    function asignarSiluetaCorrespondiente(){
+      console.log("asigno imagen" +localStorage.getItem("idImagen")+".png" );
+      document.getElementById("referencia").src="imagenesSiluetas/"+localStorage.getItem("idImagen")+".png";
+
+    }
+
+   // $(document).ready(function() {
+     // console.log("ready")
+   //   asignarSiluetaCorrespondiente();
+   // });
+
+    
     let forwardTimes = []
     let withBoxes = true
 
@@ -155,6 +167,7 @@
 
     $(document).ready(function() {
       initFaceDetectionControls()
+      asignarSiluetaCorrespondiente();
       run()
     })
     
