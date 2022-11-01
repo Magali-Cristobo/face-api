@@ -20,7 +20,9 @@
       align-items: center;
       background-color: rgb(61,58,53);
     }
-
+    #imagen{
+      width: 100%;
+    }
     canvas {
       position: absolute;
     }
@@ -62,16 +64,16 @@
 <body>
   <div class="container">
     <div class="row fila"> 
-      <div class="col s3"></div>
-      <div class="col s6">
+      <div class="col s2"></div>
+      <div class="col s8">
       <div style="position: relative; overflow: auto" id="imagenCapturada" class="">
       </div>
     </div>
-    <div class="col s3"></div>
+    <div class="col s2"></div>
     </div>   
     <div class="row">
-      <div class="col s3"></div>
-      <div class="col s6">
+      <div class="col s2"></div>
+      <div class="col s8">
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capture()" style="background: url('recortar.png')" id="recortar"></button> 
@@ -79,7 +81,7 @@
           <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
       </div>
-      <div class="col s3"></div> 
+      <div class="col s2"></div> 
     </div>
   </div>
   <script  src="server.js"></script>
