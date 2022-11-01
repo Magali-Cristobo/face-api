@@ -177,9 +177,7 @@
       var video = document.querySelector("video");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-       canvas
-        .getContext("2d")
-        .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
       let image = canvas.toDataURL('image/jpeg');
       localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
       console.log("imagen"+ parseInt(localStorage.getItem("idImagen")));

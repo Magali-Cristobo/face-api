@@ -94,8 +94,10 @@
       rotacion+=90
       const img = document.getElementById('imagen');
       img.style.rotate = rotacion+'deg';  
+      // img.style.transform = "rotate(270deg)";
     }
     function aceptar(){
+      // localStorage.setItem(idImagen, img.style.rotate);
       var canvas = document.createElement("canvas");
       var img = document.querySelector("img");
       console.log(img.style.rotate);
