@@ -21,6 +21,15 @@
       background-color: rgb(61,58,53);
     }
 
+
+    #bocaCerradaIzq{
+      width: 209px;
+      height: 350px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+    }
+
     canvas {
       position: absolute;
     }
@@ -31,11 +40,9 @@
       align-items: center;
     }
     .silueta{
-      width:300px;
-      height:350px;
       position:absolute;
-      top:50%;
-      left:50%;
+      /*top:50%;
+      left:50%;*/
       transform:translate(-50%,-50%);
       }
       .boton{
@@ -72,7 +79,7 @@
           <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
           <canvas id="overlay">
         </div>
-        <img class="silueta" id="referencia" src=""/>
+        <img class="silueta" id="silueta" src=""/>
       </div>
       <div class="col s2"></div>
     </div>   
@@ -93,16 +100,39 @@
   <script  src="server.js"></script>
   </body>
   <script>
+  
+    var bocaCeradaDerStyle = "width: 174px;height: 274px;position: absolute; top: 45%;left: 50%;";
     function asignarSiluetaCorrespondiente(){
-      console.log("asigno imagen" +localStorage.getItem("idImagen")+".png" );
-      document.getElementById("referencia").src="imagenesSiluetas/"+localStorage.getItem("idImagen")+".png";
+      console.log(localStorage.getItem("idImagen"));
+      switch(localStorage.getItem("idImagen")){
+        case "1":
+        console.log("entro switch")
+        document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
+        document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoDer.png";
+
+        break;
+        case "2":
+        console.log("entro switch 2 ")
+        document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
+        document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoIzq.png";
+
+        break;
+        case 2:
+        break;
+        default:
+        console.log("default");
+        break;
+      }
+     // document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
+     // console.log("llegue after classname");
+     // document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoDer.png";
 
     }
 
-   // $(document).ready(function() {
-     // console.log("ready")
-   //   asignarSiluetaCorrespondiente();
-   // });
+    $(document).ready(function() {
+      console.log("ready")
+      asignarSiluetaCorrespondiente();
+    });
 
     
     let forwardTimes = []
