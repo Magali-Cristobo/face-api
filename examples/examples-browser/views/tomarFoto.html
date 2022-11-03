@@ -22,12 +22,61 @@
     }
 
 
-    #bocaCerradaIzq{
-      width: 209px;
-      height: 350px;
+    #frenteSonriendo{
+      position: absolute;
+      display: none;
+      top: 45%;
+      left: 50%;
+    }
+    #cerradoIzq{
+      width: 174px;
+      height: 274px;
       position: absolute;
       top: 45%;
       left: 50%;
+      display: none;
+    }
+    #cerradoDer{
+      width: 174px;
+      height: 274px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      display: none;
+    }
+
+    #maxInferior{
+      position: absolute;
+      top: 56%;
+      left: 50%;
+      display: none;
+    }
+
+    #maxSuperior{
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      display: none;
+    }
+
+    #caraSonriendo{
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: none;
+    }
+
+    #serio{
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: none;
+    }
+    #perfil{
+      position: absolute;
+      top: 48%;
+      left: 54%;
+      display: none;
     }
 
     canvas {
@@ -79,7 +128,19 @@
           <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
           <canvas id="overlay">
         </div>
-        <img class="silueta" id="silueta" src=""/>
+        <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/cerradoIzq.png"/>
+        <img class="silueta" id="cerradoDer" src="imagenesSiluetas/cerradoDer.png"/>
+        <img class="silueta" id="serio" src="imagenesSiluetas/serio.png"/>
+        <img class="silueta" id="caraSonriendo" src="imagenesSiluetas/caraSonriendo.png"/>
+        <img class="silueta" id="maxInferior" src="imagenesSiluetas/maxInferior.png"/>
+        <img class="silueta" id="maxSuperior" src="imagenesSiluetas/maxSuperior.png"/>
+        <img class="silueta" id="perfil" src="imagenesSiluetas/perfil.png"/>
+        <img class="silueta" id="frenteSonriendo" src="imagenesSiluetas/frenteSonriendo.png"/>
+
+
+
+
+
       </div>
       <div class="col s2"></div>
     </div>   
@@ -100,32 +161,20 @@
   <script  src="server.js"></script>
   </body>
   <script>
-  
-    var bocaCeradaDerStyle = "width: 174px;height: 274px;position: absolute; top: 45%;left: 50%;";
+    let idMConNombreSilueta=new Map([
+    [1,"perfil"],
+    [2,"serio"],
+    [3,"caraSonriendo"],
+    [4,"maxSuperior"],
+    [5,"maxInferior"],
+    [6,"cerradoDer"],
+    [7,"frenteSonriendo"],
+    [8,"cerradoIzq"],
+    ]);
+
     function asignarSiluetaCorrespondiente(){
-      console.log(localStorage.getItem("idImagen"));
-      switch(localStorage.getItem("idImagen")){
-        case "1":
-        console.log("entro switch")
-        document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
-        document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoDer.png";
-
-        break;
-        case "2":
-        console.log("entro switch 2 ")
-        document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
-        document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoIzq.png";
-
-        break;
-        case 2:
-        break;
-        default:
-        console.log("default");
-        break;
-      }
-     // document.getElementById("silueta").style.cssText += bocaCeradaDerStyle;
-     // console.log("llegue after classname");
-     // document.getElementById("silueta").src="imagenesSiluetas/"+"cerradoDer.png";
+      var idImagen = parseInt(localStorage.getItem("idImagen"));
+      document.getElementById(idMConNombreSilueta.get(7)).style.cssText += "display:block";   
 
     }
 
