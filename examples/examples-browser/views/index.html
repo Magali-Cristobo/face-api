@@ -48,7 +48,7 @@
         function openImg(id){
             console.log(id);
             localStorage.setItem("idImagen",id);
-            if (document.getElementById(id).getElementsByTagName("img")[0].src!="http://localhost:3000/img.jpg"){ //si ya saco la foto que vaya a editar
+            if (document.getElementById(id).getElementsByTagName("img")[0].src=="http://localhost:3000/imagen"+id){ //si ya saco la foto que vaya a editar
                 window.location.href = "http://localhost:3000/editar"; // ta medio raro esto pero para probar
             }
             else{
