@@ -9,6 +9,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src="localforage/dist/localforage.js"></script>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
   <style>
     body {
       margin: 0;
@@ -58,22 +60,31 @@
     .fila{
       display: flex;
     }
+    @media (max-width:450px)  {
+      .boton{
+        width: 45px;
+        height: 54px;
+        background-size: inherit;
+        border:0;
+      }
+      .center button{
+        display:inline-block;
+        margin-left:6px;
+        margin-right:6px; 
+      }
+    }   
 
   </style>
 </head>
 <body>
   <div class="container">
     <div class="row fila"> 
-      <div class="col s2"></div>
-      <div class="col s8">
-      <div style="position: relative; overflow: auto" id="imagenCapturada" class="">
+      <div class="col s12 l8 offset-l2">
+        <div style="position: relative; overflow: auto" id="imagenCapturada" class=""></div>
       </div>
-    </div>
-    <div class="col s2"></div>
     </div>   
     <div class="row">
-      <div class="col s2"></div>
-      <div class="col s8">
+      <div class="col s10 l8 offset-l2 offset-s1">
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capture()" style="background: url('recortar.png')" id="recortar"></button> 
@@ -81,7 +92,6 @@
           <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
       </div>
-      <div class="col s2"></div> 
     </div>
   </div>
   <script  src="server.js"></script>
