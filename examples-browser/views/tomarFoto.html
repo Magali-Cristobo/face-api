@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="face-api.js"></script>
+  <script src="js/commons.js"></script>
+  <script src="js/faceDetectionControls.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="localforage/dist/localforage.js"></script>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(61,58,53);
+    }
+
+
+    #frenteSonriendo{
+      position: absolute;
+      display: none;
+      top: 45%;
+      left: 50%;
+    }
+    #cerradoIzq{
+      width: 174px;
+      height: 274px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      display: none;
+    }
+    #cerradoDer{
+      width: 174px;
+      height: 274px;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      display: none;
+    }
+
+    #maxInferior{
+      position: absolute;
+      top: 56%;
+      left: 50%;
+      display: none;
+    }
+
+    #maxSuperior{
+      position: absolute;
+      top: 44%;
+      left: 50%;
+      display: none;
+    }
+
+    #caraSonriendo{
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: none;
+    }
+
+    #serio{
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: none;
+    }
+    #perfil{
+      position: absolute;
+      top: 39%;
+      left: 50%;
+      display: none;
+    }
+
+    canvas {
+      position: absolute;
+    }
+    .flexbox {
+      display: flex;
+      flew-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .silueta{
+      position:absolute;
+      /*top:50%;
+      left:50%;*/
+      transform:translate(-50%,-50%);
+      z-index: 1;
+      }
+
+      .boton{
+        width: 70px;
+        height: 85px;
+        background-size: cover !important;
+        border:0;
+      }
+    
+    .center{
+        text-align:center;
+        z-index: 10;
+    }
+    
+    .center button{
+        display:inline-block;
+        margin-left:30px;
+        margin-right:30px; 
+    }
+    #inputVideo{
+      width: 100%;
+    }
+    @media (max-width:450px)  {
+      .boton{
+        width: 55px;
+        height: 66px;
+        background-size: inherit;
+        border:0;
+      }
+      .center button{
+        display:inline-block;
+        margin-left:10px;
+        margin-right:10px; 
+      }
+      #frenteSonriendo{
+        position: absolute;
+        display: none;
+        top: 45%;
+        left: 50%;
+      }
+      #cerradoIzq{
+        width: 174px;
+        height: 274px;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        display: none;
+      }
+      #cerradoDer{
+        width: 174px;
+        height: 274px;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        display: none;
+      }
+
+      #maxInferior{
+        position: absolute;
+        top: 56%;
+        left: 50%;
+        display: none;
+      }
+
+      #maxSuperior{
+        position: absolute;
+        top: 44%;
+        left: 50%;
+        display: none;
+      }
+
+      #caraSonriendo{
+        position: absolute;
+        top: 39%;
+        left: 50%;
+        display: none;
+      }
+
+      #serio{
+        position: absolute;
+        top: 39%;
+        left: 50%;
+        display: none;
+      }
+      #perfil{
+        position: absolute;
+        top: 39%;
+        left: 50%;
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 l8 offset-l2">
+        <div style="position: relative;" class="">
+          <canvas id="canvas" style="overflow:auto"></canvas>
+          <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+          <canvas id="overlay">
+        </div>
+        <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/cerradoIzq.png"/>
+        <img class="silueta" id="cerradoDer" src="imagenesSiluetas/cerradoDer.png"/>
+        <img class="silueta" id="serio" src="imagenesSiluetas/serio.png"/>
+        <img class="silueta" id="caraSonriendo" src="imagenesSiluetas/caraSonriendo.png"/>
+        <img class="silueta" id="maxInferior" src="imagenesSiluetas/maxInferior.png"/>
+        <img class="silueta" id="maxSuperior" src="imagenesSiluetas/maxSuperior.png"/>
+        <img class="silueta" id="perfil" src="imagenesSiluetas/perfil.png"/>
+        <img class="silueta" id="frenteSonriendo" src="imagenesSiluetas/frenteSonriendo.png"/>
+      </div>
+    </div>   
+    <div class="row">
+      <div class="col s10 l8 offset-s1 offset-l2">
+        <div class="center">
+          <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
+          <button class="boton" onclick="capture()" style="background: url('circulo.png')" id="capturar"></button> 
+          <button class="boton" onclick="saltar()" style="background: url('saltar.png')" id="saltar"></button>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <script  src="server.js"></script>
+  </body>
+  <script>
+    let idMConNombreSilueta=new Map([
+    [1,"perfil"],
+    [2,"serio"],
+    [3,"caraSonriendo"],
+    [4,"maxSuperior"],
+    [5,"maxInferior"],
+    [6,"cerradoDer"],
+    [7,"frenteSonriendo"],
+    [8,"cerradoIzq"],
+    ]);
+
+    function asignarSiluetaCorrespondiente(){
+      var idImagen = parseInt(localStorage.getItem("idImagen"));
+      document.getElementById(idMConNombreSilueta.get(idImagen)).style.cssText += "display:block";   
+
+    }
+
+    $(document).ready(function() {
+      console.log("ready")
+      asignarSiluetaCorrespondiente();
+    });
+
+    
+    // let forwardTimes = []
+    // let withBoxes = true
+
+    // function updateTimeStats(timeInMs) {
+    //   forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
+    //   const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
+    //   $('#time').val(`${Math.round(avgTimeInMs)} ms`)
+    //   $('#fps').val(`${faceapi.utils.round(1000 / avgTimeInMs)}`)
+    // }
+
+    async function onPlay() {
+      const videoEl = $('#inputVideo').get(0)
+
+      if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
+        return setTimeout(() => onPlay())
+
+
+    //   const options = getFaceDetectorOptions()
+
+    //   const ts = Date.now()
+
+    //   const result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions()
+
+    //   updateTimeStats(Date.now() - ts)
+
+    //   if (result) {
+    //     const canvas = $('#overlay').get(0)
+    //     const dims = faceapi.matchDimensions(canvas, videoEl, true)
+
+    //     const resizedResult = faceapi.resizeResults(result, dims)
+    //     const minConfidence = 0.05
+    //     if (withBoxes) {
+    //       faceapi.draw.drawDetections(canvas, resizedResult)
+    //     }
+        //if(JSON.stringify(resizedResult.expressions.happy )> 0.95){
+          //$('#capturar').get(0).style.display = "block";
+        //}
+        //else{
+         // $('#capturar').get(0).style.display = "none";
+       // }
+        // faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence) lo comento pero tb se puede dejar
+    //   }
+
+      setTimeout(() => onPlay())
+    }
+
+    async function run() {
+      // load face detection and face expression recognition models
+      // await changeFaceDetector(TINY_FACE_DETECTOR)
+      // await faceapi.loadFaceExpressionModel('/')
+      // changeInputSize(224)
+
+      // try to access users webcam and stream the images
+      // to the video element
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      const videoEl = $('#inputVideo').get(0)
+      videoEl.srcObject = stream
+    }
+
+    // function updateResults() {}
+
+    $(document).ready(function() {
+      asignarSiluetaCorrespondiente();
+      run()
+    })
+
+    function saltar(){
+      if(localStorage.getItem("idImagen") < 8 ){
+          localStorage.setItem("idImagen", parseInt(localStorage.getItem("idImagen"))+1);
+          if(localStorage.getItem(("imagen")+parseInt(localStorage.getItem("idImagen"))) != null){
+            location.href="http://localhost:3000/editar"; 
+          }
+          else{
+            location.href="http://localhost:3000/capturar";
+          }
+      }
+      else{
+        location.href="http://localhost:3000/";
+      }
+    }
+
+    function capture() {
+      localStorage.setItem("cantImagenes",parseInt(localStorage.getItem("cantImagenes")+1));
+      var canvas = document.getElementById("canvas");
+      canvas.style.display = "none";
+      var video = document.querySelector("video");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      let image = canvas.toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
+      console.log("imagen"+ parseInt(localStorage.getItem("idImagen")));
+      location.href="http://localhost:3000/editar";
+ 
+    
+      /** Code to merge image **/
+      /** For instance, if I want to merge a play image on center of existing image **/
+      const playImage = new Image();
+      playImage.src = "path to image asset";
+      playImage.onload = () => {
+        const startX = video.videoWidth / 2 - playImage.width / 2;
+        const startY = video.videoHeight / 2 - playImage.height / 2;
+        canvas
+          .getContext("2d")
+          .drawImage(playImage, startX, startY, playImage.width, playImage.height);
+        canvas.toBlob() = (blob) => {
+          const img = new Image();
+          img.src = window.URL.createObjectUrl(blob);
+        };
+      };
+    /** End **/
+   
+  }
+  function cancelar(){
+    // ver si queremos que si toca cancelar se borre si ya la saco, seria agregarle lo de fotoCapturada nomas
+      location.href="http://localhost:3000/";
+    }
+  //  capture(); 
+  </script>
+</body>
+</html
