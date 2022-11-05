@@ -192,9 +192,6 @@
   <div class="container">
     <div class="row">
       <div class="col s12 l8 offset-l2">
-        <div class="progress" id="loader">
-          <div class="indeterminate"></div>
-        </div>
         <div style="position: relative;" class="">
           <canvas id="canvas" style="overflow:auto"></canvas>
           <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
@@ -246,21 +243,21 @@
     });
 
     
-    let forwardTimes = []
-    let withBoxes = true
+    // let forwardTimes = []
+    // let withBoxes = true
 
-    function updateTimeStats(timeInMs) {
-      forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
-      const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
-      $('#time').val(`${Math.round(avgTimeInMs)} ms`)
-      $('#fps').val(`${faceapi.utils.round(1000 / avgTimeInMs)}`)
-    }
+    // function updateTimeStats(timeInMs) {
+    //   forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
+    //   const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
+    //   $('#time').val(`${Math.round(avgTimeInMs)} ms`)
+    //   $('#fps').val(`${faceapi.utils.round(1000 / avgTimeInMs)}`)
+    // }
 
-    // async function onPlay() {
-    //   const videoEl = $('#inputVideo').get(0)
+    async function onPlay() {
+      const videoEl = $('#inputVideo').get(0)
 
-    //   if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
-    //     return setTimeout(() => onPlay())
+      if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
+        return setTimeout(() => onPlay())
 
 
     //   const options = getFaceDetectorOptions()
@@ -289,14 +286,14 @@
         // faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence) lo comento pero tb se puede dejar
     //   }
 
-    //   setTimeout(() => onPlay())
-    // }
+      setTimeout(() => onPlay())
+    }
 
     async function run() {
       // load face detection and face expression recognition models
-      await changeFaceDetector(TINY_FACE_DETECTOR)
-      await faceapi.loadFaceExpressionModel('/')
-      changeInputSize(224)
+      // await changeFaceDetector(TINY_FACE_DETECTOR)
+      // await faceapi.loadFaceExpressionModel('/')
+      // changeInputSize(224)
 
       // try to access users webcam and stream the images
       // to the video element
@@ -305,10 +302,9 @@
       videoEl.srcObject = stream
     }
 
-    function updateResults() {}
+    // function updateResults() {}
 
     $(document).ready(function() {
-      initFaceDetectionControls()
       asignarSiluetaCorrespondiente();
       run()
     })
