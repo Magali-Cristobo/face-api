@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+    <script src="js/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registros AllRight</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -37,19 +37,19 @@
   <body>
     <div class="container prueba">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4  columna" id="1"><img class="imagen" src="fondoPerfil.jpg" onclick="openImg(1)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4  columna" id="1"><img class="imagen" id="uno" src="fondoPerfil.jpg" onclick="openImg(1)"></div>
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="2"><img class="imagen" src="fondoSerio.jpg" onclick="openImg(2)"></div>
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="3"><img class="imagen" src="fondoCaraSonrisa.jpg" onclick="openImg(3)"></div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="4"><img class="imagen" src="fondoMaxSuperior.jpg" onclick="openImg(4)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna divBoton" ><button type="button" id="boton" class="boton btn btn-success" style="display: none;" href="fondoPerfil.jpg" download="a">Finalizar</button></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna divBoton" ><button type="button" id="botonDescargar" class="boton btn btn-success" onclick="descargar()" style="display: none;" href="fondoPerfil.jpg">Finalizar</button></div>
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="5"><img class="imagen" src="fondoMaxInferior.jpg" onclick="openImg(5)"></div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="6"><img class="imagen" src="fondoBocaDer.jpg" onclick="openImg(6)"></div>
             <div class="col-xs-12 col-sm-12 col-md-4 columna" id="7"><img class="imagen" src="fondoSonrisa.jpg" onclick="openImg(7)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="8"><img class="imagen" src="fondoBocaIzq.jpg" onclick="openImg(8)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="8"><a download="custom-filename.jpg" href="/path/to/image" title="ImageName"><img class="imagen" src="fondoBocaIzq.jpg" onclick="openImg(8)"></a></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
@@ -67,7 +67,7 @@
             }
         }
         $(document).ready(function() {
-            insertarImagen()
+            insertarImagen();
           })
 
         function insertarImagen(){
@@ -90,6 +90,23 @@
                 document.getElementById("4").scrollIntoView();
             }
         }
-    </script>
+            function descargar(){ 
+                console.log("funcion download");
+            let bd=document.getElementById("botonDescargar");
+            let img=document.getElementById('uno');
+            //bd.addEventListener('click',()=>{
+              //  console.log("eventListenr");
+                let impath=img.getAttribute('src');
+                let fn=getFileName(impath);
+                saveAs(impath,fn);
+           // });
+            }
+            function getFileName(str){
+                return str.substring(str.lastIndexOf('/')+1);
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+
+       
 </body>
 </html>
