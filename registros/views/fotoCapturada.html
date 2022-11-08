@@ -118,7 +118,8 @@
     }
     function guardar(){
       let imgSrc=cropper.getCroppedCanvas({
-        width: img.naturalWidth
+        width: img.naturalWidth, 
+        height: img.naturalHeight
       }).toDataURL('image/jpeg');
       localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
       var src = document.getElementById("imagenCapturada");
