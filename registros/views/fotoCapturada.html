@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="face-api.js"></script>
-  <script src="js/commons.js"></script>
-  <script src="js/faceDetectionControls.js"></script>
-  <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
-  <script src="https://unpkg.com/dropzone"></script>
   <script src="https://unpkg.com/cropperjs"></script>
-  <script src="localforage/dist/localforage.js"></script>
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <style>
@@ -96,27 +89,62 @@
           <button class="boton" onclick="rotar()" style="background: url('rotar.png')" id="rotar"></button>  
           <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
-        <button class="boton guardar" onclick="guardar()" style="display: none;"></button>
       </div>
     </div>
   </div>
-  <script  src="server.js"></script>
   </body>
   <script>
     var rotacion = 0;
     var img;
     var idImagen = parseInt(localStorage.getItem("idImagen"));
     var cropper;
+    var click=0;
+
     $(document).ready(function() {
       insertarImagen();
     })
 
     function recortar(){
-      document.getElementsByClassName("center")[0].style.display = "none";
-      document.getElementsByClassName("guardar")[0].style.display = "block";
-	    cropper = new Cropper(img);
+      if(click == 0){
+        cropper = new Cropper(img);
+        click = 1;
+
+      }
     }
-    function guardar(){
+
+    function rotar(){
+      if(click == 0){
+        cropper = new Cropper(img, {
+          ready() {
+            rotarImagen();
+          }
+        });
+        click = 1;
+      }
+      else{
+        rotarImagen();
+      }
+    }
+    function rotarImagen(){
+      cropper.rotate(90);
+      let imgSrc=cropper.getCroppedCanvas({
+        width: img.naturalWidth, 
+        height: img.naturalHeight
+      }).toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+      img.src = imgSrc;
+    }
+
+    function aceptar(){
+      // localStorage.setItem(idImagen, img.style.rotate);
+      // var canvas = document.createElement("canvas");
+      // var img = document.querySelector("img");
+      // console.log(img.style.rotate);
+      // canvas.width = img.naturalWidth;
+      // canvas.height = img.naturalHeight;
+      // canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      // let image = canvas.toDataURL('image/jpeg');
+      // localStorage.setItem("imagen"+ idImagen, image);
       let imgSrc=cropper.getCroppedCanvas({
         width: img.naturalWidth, 
         height: img.naturalHeight
@@ -127,29 +155,6 @@
       img = document.createElement("img");
       img.id = "imagen";
       img.src = localStorage.getItem("imagen"+idImagen);
-      console.log("imagen"+idImagen);
-      src.appendChild(img);
-      cropper.destroy();
-      document.getElementsByClassName("guardar")[0].style.display = "none";
-      document.getElementsByClassName("center")[0].style.display = "block";
-    }
-
-    function rotar(){
-      rotacion+=90
-      const img = document.getElementById('imagen');
-      img.style.rotate = rotacion+'deg';  
-      // img.style.transform = "rotate(270deg)";
-    }
-    function aceptar(){
-      // localStorage.setItem(idImagen, img.style.rotate);
-      var canvas = document.createElement("canvas");
-      var img = document.querySelector("img");
-      console.log(img.style.rotate);
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-      let image = canvas.toDataURL('image/jpeg');
-      localStorage.setItem("imagen"+ idImagen, image);
       location.href="http://localhost:3000/";
 
     }
