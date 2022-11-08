@@ -5,6 +5,7 @@
   "author": "justadudewhohacks",
   "license": "MIT",
   "dependencies": {
+    "cropperjs": "^1.5.12",
     "express": "^4.17.1",
     "localforage": "^1.10.0",
     "request": "^2.88.2"

@@ -5,9 +5,14 @@
   <script src="js/commons.js"></script>
   <script src="js/faceDetectionControls.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/dropzone"></script>
+  <script src="https://unpkg.com/cropperjs"></script>
   <script src="localforage/dist/localforage.js"></script>
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
@@ -87,10 +92,11 @@
       <div class="col s10 l8 offset-l2 offset-s1">
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
-          <button class="boton" onclick="capture()" style="background: url('recortar.png')" id="recortar"></button> 
+          <button class="boton" onclick="recortar()" style="background: url('recortar.png')" id="recortar"></button> 
           <button class="boton" onclick="rotar()" style="background: url('rotar.png')" id="rotar"></button>  
           <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
         </div>
+        <button class="boton guardar" onclick="guardar()" style="display: none;"></button>
       </div>
     </div>
   </div>
@@ -98,10 +104,35 @@
   </body>
   <script>
     var rotacion = 0;
+    var img;
     var idImagen = parseInt(localStorage.getItem("idImagen"));
+    var cropper;
     $(document).ready(function() {
-      insertarImagen()
+      insertarImagen();
     })
+
+    function recortar(){
+      document.getElementsByClassName("center")[0].style.display = "none";
+      document.getElementsByClassName("guardar")[0].style.display = "block";
+	    cropper = new Cropper(img);
+    }
+    function guardar(){
+      let imgSrc=cropper.getCroppedCanvas({
+        width: img.naturalWidth
+      }).toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+      var src = document.getElementById("imagenCapturada");
+      src.removeChild(img);
+      img = document.createElement("img");
+      img.id = "imagen";
+      img.src = localStorage.getItem("imagen"+idImagen);
+      console.log("imagen"+idImagen);
+      src.appendChild(img);
+      cropper.destroy();
+      document.getElementsByClassName("guardar")[0].style.display = "none";
+      document.getElementsByClassName("center")[0].style.display = "block";
+    }
+
     function rotar(){
       rotacion+=90
       const img = document.getElementById('imagen');
@@ -123,7 +154,7 @@
     }
 
     function insertarImagen(){
-      var img = document.createElement("img");
+      img = document.createElement("img");
       img.id = "imagen";
       img.src = localStorage.getItem("imagen"+idImagen);
       console.log("imagen"+idImagen);
