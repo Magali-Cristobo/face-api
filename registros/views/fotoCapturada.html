@@ -145,6 +145,17 @@
       // canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
       // let image = canvas.toDataURL('image/jpeg');
       // localStorage.setItem("imagen"+ idImagen, image);
+      try{ 
+      var canvas = document.createElement("canvas");
+      var img = document.querySelector("img");
+      console.log(img.style.rotate);
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+      let image = canvas.toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ idImagen, image);
+      location.href="http://localhost:3000/";} catch(error){}
+      try{ 
       let imgSrc=cropper.getCroppedCanvas({
         width: img.naturalWidth, 
         height: img.naturalHeight
@@ -155,7 +166,7 @@
       img = document.createElement("img");
       img.id = "imagen";
       img.src = localStorage.getItem("imagen"+idImagen);
-      location.href="http://localhost:3000/";
+      location.href="http://localhost:3000/"} catch(error){};
 
     }
 
