@@ -19,35 +19,6 @@ app.get('/', (req, res) => res.redirect('/inicio'))
 app.get('/inicio', (req, res) => res.sendFile(path.join(viewsDir, 'inicio.html')))
 app.get('/capturar', (req, res) => res.sendFile(path.join(viewsDir, 'tomarFoto.html')))
 app.get('/editar', (req, res) => res.sendFile(path.join(viewsDir, 'fotoCapturada.html')))
-// app.get('/face_expression_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'faceExpressionRecognition.html')))
-// app.get('/age_and_gender_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'ageAndGenderRecognition.html')))
-// app.get('/face_extraction', (req, res) => res.sendFile(path.join(viewsDir, 'faceExtraction.html')))
-// app.get('/face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'faceRecognition.html')))
-// app.get('/video_face_tracking', (req, res) => res.sendFile(path.join(viewsDir, 'videoFaceTracking.html')))
-// app.get('/webcam_face_detection', (req, res) => res.sendFile(path.join(viewsDir, 'webcamFaceDetection.html')))
-// app.get('/webcam_face_landmark_detection', (req, res) => res.sendFile(path.join(viewsDir, 'webcamFaceLandmarkDetection.html')))
-// app.get('/webcam_face_expression_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'webcamFaceExpressionRecognition.html')))
-// app.get('/webcam_age_and_gender_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'webcamAgeAndGenderRecognition.html')))
-// app.get('/bbt_face_landmark_detection', (req, res) => res.sendFile(path.join(viewsDir, 'bbtFaceLandmarkDetection.html')))
-// app.get('/bbt_face_similarity', (req, res) => res.sendFile(path.join(viewsDir, 'bbtFaceSimilarity.html')))
-// app.get('/bbt_face_matching', (req, res) => res.sendFile(path.join(viewsDir, 'bbtFaceMatching.html')))
-// app.get('/bbt_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'bbtFaceRecognition.html')))
-// app.get('/batch_face_landmarks', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceLandmarks.html')))
-// app.get('/batch_face_recognition', (req, res) => res.sendFile(path.join(viewsDir, 'batchFaceRecognition.html')))
-
-app.post('/fetch_external_image', async (req, res) => {
-  const { imageUrl } = req.body
-  if (!imageUrl) {
-    return res.status(400).send('imageUrl param required')
-  }
-  try {
-    const externalResponse = await request(imageUrl)
-    res.set('content-type', externalResponse.headers['content-type'])
-    return res.status(202).send(Buffer.from(externalResponse.body))
-  } catch (err) {
-    return res.status(404).send(err.toString())
-  }
-})
 
 app.listen(3000, () => console.log('Listening on port 3000!'))
 

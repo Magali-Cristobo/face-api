@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registros AllRight</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -35,21 +34,42 @@
     </style>
     </head>
   <body>
-    <div class="container prueba">
+    <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4  columna" id="1"><img class="imagen" id="imagen1" src="fondoPerfil.jpg" onclick="openImg(1)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="2"><img class="imagen" id="imagen2" src="fondoSerio.jpg" onclick="openImg(2)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="3"><img class="imagen" id="imagen3" src="fondoCaraSonrisa.jpg" onclick="openImg(3)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4  columna" id="1"><img class="imagen" id="imagen1" src="./fondos/fondoPerfil.jpg" onclick="openImg(1)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="2"><img class="imagen" id="imagen2" src="./fondos/fondoSerio.jpg" onclick="openImg(2)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="3"><img class="imagen" id="imagen3" src="./fondos/fondoCaraSonrisa.jpg" onclick="openImg(3)"></div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="4"><img class="imagen" id="imagen4" src="fondoMaxSuperior.jpg" onclick="openImg(4)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="4"><img class="imagen" id="imagen4" src="./fondos/fondoMaxSuperior.jpg" onclick="openImg(4)"></div>
             <div class="col-xs-12 col-sm-12 col-md-4 columna divBoton" ><button type="button" id="botonDescargar" class="boton btn btn-success" onclick="descargar()" style="display: none;" href="fondoPerfil.jpg">Finalizar</button></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="5"><img class="imagen" id="imagen5" src="fondoMaxInferior.jpg" onclick="openImg(5)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="5"><img class="imagen" id="imagen5" src="./fondos/fondoMaxInferior.jpg" onclick="openImg(5)"></div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="6"><img class="imagen"  id="imagen6" src="fondoBocaDer.jpg" onclick="openImg(6)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="7"><img class="imagen" id="imagen7" src="fondoSonrisa.jpg" onclick="openImg(7)"></div>
-            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="8"><img class="imagen" id="imagen8" src="fondoBocaIzq.jpg" onclick="openImg(8)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="6"><img class="imagen"  id="imagen6" src="./fondos/fondoBocaDer.jpg" onclick="openImg(6)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="7"><img class="imagen" id="imagen7" src="./fondos/fondoSonrisa.jpg" onclick="openImg(7)"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna" id="8"><img class="imagen" id="imagen8" src="./fondos/fondoBocaIzq.jpg" onclick="openImg(8)"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4  columna" ></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 columna divBoton"><button type="button" class="boton btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar Imagenes</button></div>
+            <div class="col-xs-12 col-sm-12 col-md-4  columna" ></div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar todas las imagenes?</h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-danger" onclick="eliminarImagenes()" data-bs-dismiss="modal">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
@@ -57,18 +77,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>   
     <script>
         function openImg(id){
-            console.log(id);
             localStorage.setItem("idImagen",id);
             if (document.getElementById(id).getElementsByTagName("img")[0].src.substring(0, 4)!="http"){ //si ya saco la foto que vaya a editar
-                window.location.href = "http://localhost:3000/editar"; // ta medio raro esto pero para probar
+                window.location.href = "http://localhost:3000/editar"; 
             }
             else{
-                window.location.href = "http://localhost:3000/capturar"; // ta medio raro esto pero para probar
+                window.location.href = "http://localhost:3000/capturar"; 
             }
         }
         $(document).ready(function() {
             insertarImagen();
-          })
+        })
+
+        function eliminarImagenes(){
+            localStorage.clear();
+            window.location.href = "http://localhost:3000/"; 
+        }
 
         function insertarImagen(){
             var i = 0;
@@ -76,10 +100,8 @@
             var cantImagenes = 0;
             while (i < document.getElementsByClassName("columna").length){
                 idImagen = parseInt(document.getElementsByClassName("columna")[i].id)
-                console.log(document.getElementsByClassName("columna")[i].id);
                 if(localStorage.getItem("imagen"+ idImagen ) != null){
                     document.getElementsByClassName("columna")[i].firstChild.src=localStorage.getItem("imagen"+idImagen);
-                    console.log(document.getElementsByClassName("columna")[i].firstChild.src);
                     cantImagenes++;
                 }
                 i++;
@@ -106,7 +128,6 @@
             let bd=document.getElementById("botonDescargar");
             i=1;
             while(i<=8){ 
-                console.log("vuelta numero" + i);
                 let img=document.getElementById("imagen"+i);
                 let impath=img.getAttribute('src');
                 let fn=getFileName(impath);
@@ -118,10 +139,7 @@
         function getFileName(str){
             return str.substring(str.lastIndexOf('/')+1);
         }
-
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
-
-       
-</body>
+    </body>
 </html>

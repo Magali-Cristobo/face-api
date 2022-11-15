@@ -39,13 +39,14 @@
       top:50%;
       left:50%;
       transform:translate(-50%,-50%);
-      }
-      .boton{
-        width: 70px;
-        height: 85px;
-        background-size: cover !important;
-        border:0;
-      }
+    }
+
+    .boton{
+      width: 70px;
+      height: 85px;
+      background-size: cover !important;
+      border:0;
+    }
     .center{
         text-align:center;
     }
@@ -55,9 +56,7 @@
         margin-left:30px;
         margin-right:30px; 
     }
-    .fila{
-      display: flex;
-    }
+
     @media (max-width:450px)  {
       .boton{
         width: 45px;
@@ -84,17 +83,16 @@
     <div class="row">
       <div class="col s10 l8 offset-l2 offset-s1">
         <div class="center">
-          <button class="boton" onclick="cancelar()"  style="background: url('cancelar.png')"  id="cancelar"></button> 
-          <button class="boton" onclick="recortar()" style="background: url('recortar.png')" id="recortar"></button> 
-          <button class="boton" onclick="rotar()" style="background: url('rotar.png')" id="rotar"></button>  
-          <button class="boton" onclick="aceptar()" style="background: url('aceptar.png')" id="aceptar"></button> 
+          <button class="boton" onclick="cancelar()"  style="background: url('fotosBotones/cancelar.png')"  id="cancelar"></button> 
+          <button class="boton" onclick="recortar()" style="background: url('./fotosBotones/recortar.png')" id="recortar"></button> 
+          <button class="boton" onclick="rotar()" style="background: url('./fotosBotones/rotar.png')" id="rotar"></button>  
+          <button class="boton" onclick="aceptar()" style="background: url('./fotosBotones/aceptar.png')" id="aceptar"></button> 
         </div>
       </div>
     </div>
   </div>
   </body>
   <script>
-    var rotacion = 0;
     var img;
     var idImagen = parseInt(localStorage.getItem("idImagen"));
     var cropper;
@@ -108,7 +106,6 @@
       if(click == 0){
         cropper = new Cropper(img);
         click = 1;
-
       }
     }
 
@@ -136,25 +133,18 @@
     }
 
     function aceptar(){
-      // localStorage.setItem(idImagen, img.style.rotate);
-      // var canvas = document.createElement("canvas");
-      // var img = document.querySelector("img");
-      // console.log(img.style.rotate);
-      // canvas.width = img.naturalWidth;
-      // canvas.height = img.naturalHeight;
-      // canvas.getContext("2d").drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-      // let image = canvas.toDataURL('image/jpeg');
-      // localStorage.setItem("imagen"+ idImagen, image);
-      let imgSrc=cropper.getCroppedCanvas({
-        width: img.naturalWidth, 
-        height: img.naturalHeight
-      }).toDataURL('image/jpeg');
-      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
-      var src = document.getElementById("imagenCapturada");
-      src.removeChild(img);
-      img = document.createElement("img");
-      img.id = "imagen";
-      img.src = localStorage.getItem("imagen"+idImagen);
+      if (click == 1){
+        let imgSrc=cropper.getCroppedCanvas({
+          width: img.naturalWidth, 
+          height: img.naturalHeight
+        }).toDataURL('image/jpeg');
+        localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+        var src = document.getElementById("imagenCapturada");
+        src.removeChild(img);
+        img = document.createElement("img");
+        img.id = "imagen";
+        img.src = localStorage.getItem("imagen"+idImagen);
+      }
       location.href="http://localhost:3000/";
 
     }
@@ -163,7 +153,6 @@
       img = document.createElement("img");
       img.id = "imagen";
       img.src = localStorage.getItem("imagen"+idImagen);
-      console.log("imagen"+idImagen);
       var src = document.getElementById("imagenCapturada");
       src.appendChild(img);
     }
