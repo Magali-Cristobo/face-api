@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/cropperjs"></script>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/7637a6_216683f7d2ad462083dd23288f17ba17%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7637a6_216683f7d2ad462083dd23288f17ba17%7Emv2.png">
+  <title>All Right</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color:#2b3441;
+    }
+    #imagen{
+      width: 100%;
+    }
+    canvas {
+      position: absolute;
+    }
+    .flexbox {
+      display: flex;
+      flew-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .silueta{
+      width:300px;
+      height:350px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+    }
+
+    .boton{
+      width: 70px;
+      height: 85px;
+      background-size: cover !important;
+      border:0;
+    }
+    .center{
+        text-align:center;
+    }
+    
+    .center button{
+        display:inline-block;
+        margin-left:30px;
+        margin-right:30px; 
+    }
+
+    @media (max-width:450px)  {
+      .boton{
+        width: 45px;
+        height: 54px;
+        background-size: inherit;
+        border:0;
+      }
+      .center button{
+        display:inline-block;
+        margin-left:6px;
+        margin-right:6px; 
+      }
+    }   
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row fila"> 
+      <div class="col s12 l8 offset-l2">
+        <div style="position: relative; overflow: auto" id="imagenCapturada" class=""></div>
+      </div>
+    </div>   
+    <div class="row">
+      <div class="col s10 l8 offset-l2 offset-s1">
+        <div class="center">
+          <button class="boton" onclick="cancelar()"  style="background: url('fotosBotones/cancelar.png')"  id="cancelar"></button> 
+          <button class="boton" onclick="recortar()" style="background: url('./fotosBotones/recortar.png')" id="recortar"></button> 
+          <button class="boton" onclick="rotar()" style="background: url('./fotosBotones/rotar.png')" id="rotar"></button>  
+          <button class="boton" onclick="aceptar()" style="background: url('./fotosBotones/aceptar.png')" id="aceptar"></button> 
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <script>
+    var img;
+    var idImagen = parseInt(localStorage.getItem("idImagen"));
+    var cropper;
+    var click=0;
+
+    $(document).ready(function() {
+      insertarImagen();
+    })
+
+    function recortar(){
+      if(click == 0){
+        cropper = new Cropper(img);
+        click = 1;
+      }
+    }
+
+    function rotar(){
+      if(click == 0){
+        cropper = new Cropper(img, {
+          ready() {
+            rotarImagen();
+          }
+        });
+        click = 1;
+      }
+      else{
+        rotarImagen();
+      }
+    }
+    function rotarImagen(){
+      cropper.rotate(90);
+      let imgSrc=cropper.getCroppedCanvas({
+        width: img.naturalWidth, 
+        height: img.naturalHeight
+      }).toDataURL('image/jpeg');
+      localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+      img.src = imgSrc;
+    }
+
+    function aceptar(){
+      if (click == 1){
+        let imgSrc=cropper.getCroppedCanvas({
+          width: img.naturalWidth, 
+          height: img.naturalHeight
+        }).toDataURL('image/jpeg');
+        localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+        var src = document.getElementById("imagenCapturada");
+        src.removeChild(img);
+        img = document.createElement("img");
+        img.id = "imagen";
+        img.src = localStorage.getItem("imagen"+idImagen);
+      }
+      if(localStorage.getItem("idImagen") < 8 ){
+          localStorage.setItem("idImagen", parseInt(localStorage.getItem("idImagen"))+1);
+          if(localStorage.getItem(("imagen")+parseInt(localStorage.getItem("idImagen"))) != null){
+            location.href="http://localhost:3000/editar"; 
+          }
+          else{
+            location.href="http://localhost:3000/capturar";
+          }
+      }
+      else{
+        location.href="http://localhost:3000/";
+      }
+
+    }
+
+    function insertarImagen(){
+      img = document.createElement("img");
+      img.id = "imagen";
+      img.src = localStorage.getItem("imagen"+idImagen);
+      var src = document.getElementById("imagenCapturada");
+      src.appendChild(img);
+    }
+
+    function cancelar(){
+      localStorage.removeItem("imagen"+idImagen);
+      localStorage.setItem("cantImagenes",parseInt(localStorage.getItem("cantImagenes")-1));
+      location.href="http://localhost:3000/capturar";
+    }
+  </script>
+</body>
+</html
