@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="face-api.js"></script>
+  <script src="/face-api.js"></script>
   <script src="js/commons.js"></script>
   <script src="js/faceDetectionControls.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
@@ -190,9 +190,9 @@
     <div class="row">
       <div class="col s12 l8 offset-l2">
         <div style="position: relative;" class="">
-          <canvas id="canvas" style="overflow:auto"></canvas>
+          <canvas id="canvas" style="overflow:auto;"></canvas>
           <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
-          <canvas id="overlay">
+          <canvas id="overlay" style=" left:0;">
         </div>
         <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/cerradoIzq.png"/>
         <img class="silueta" id="cerradoDer" src="imagenesSiluetas/cerradoDer.png"/>
@@ -208,13 +208,119 @@
       <div class="col s10 l8 offset-s1 offset-l2">
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('./fotosBotones/cancelar.png')"  id="cancelar"></button> 
-          <button class="boton" onclick="capture()" style="background: url('./fotosBotones/circulo.png')" id="capturar"></button> 
+          <label id="textoSonrisa" style="visibility:hidden;">Sonreí !!!</label>
+          <button class="boton" onclick="capturar()" style="background: url('./fotosBotones/circulo.png');" id="capturar"></button> 
         </div>
       </div>
     </div>
   </div>
   </body>
   <script>
+    let forwardTimes = []
+    let withBoxes = true
+
+    function updateTimeStats(timeInMs) {
+      forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
+      const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
+      $('#time').val(`${Math.round(avgTimeInMs)} ms`)
+      $('#fps').val(`${faceapi.utils.round(1000 / avgTimeInMs)}`)
+    }
+
+    async function onPlay() {
+      const videoEl = $('#inputVideo').get(0)
+
+      if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
+        return setTimeout(() => onPlay())
+
+
+      const options = getFaceDetectorOptions()
+
+      const ts = Date.now()
+
+      const result = await faceapi.detectSingleFace(videoEl, options).withFaceExpressions()
+
+      updateTimeStats(Date.now() - ts)
+
+      if (result) {
+        const canvas = $('#overlay').get(0)
+        const dims = faceapi.matchDimensions(canvas, videoEl, true)
+
+        const resizedResult = faceapi.resizeResults(result, dims)
+        const minConfidence = 0.05
+        if (withBoxes) {
+          // faceapi.draw.drawDetections(canvas, resizedResult)
+        }
+        if(JSON.stringify(resizedResult.expressions.happy )> 0.95 && localStorage.getItem("idImagen") == 3 || JSON.stringify(resizedResult.expressions.happy )< 0.95 && localStorage.getItem("idImagen") == 2){
+          $('#capturar').get(0).style.visibility = "visible";
+          $('#textoSonrisa').get(0).style.visibility = "hidden";
+
+        }
+        else if(localStorage.getItem("idImagen") == 3 || localStorage.getItem("idImagen") == 2){
+          $('#capturar').get(0).style.visibility = "hidden";
+          $('#textoSonrisa').get(0).style.visibility = "visible";
+        }
+        if(localStorage.getItem("idImagen") == 2){
+          $('#textoSonrisa').get(0).innerHTML = "No sonrias !!";
+          // $('#textoSonrisa').get(0).style.visibility = "hidden";
+        }
+        // faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence) lo comento pero tb se puede dejar
+      }
+
+      setTimeout(() => onPlay())
+    }
+
+    async function run() {
+      // load face detection and face expression recognition models
+      await changeFaceDetector(TINY_FACE_DETECTOR)
+      await faceapi.loadFaceExpressionModel('/')
+      changeInputSize(224)
+
+      // try to access users webcam and stream the images
+      // to the video element
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      const videoEl = $('#inputVideo').get(0)
+      videoEl.srcObject = stream
+    }
+
+    function updateResults() {}
+
+    $(document).ready(function() {
+      initFaceDetectionControls()
+      asignarSiluetaCorrespondiente();
+
+      run()
+    })
+    
+    function capture() {
+    var canvas = document.getElementById("canvas");
+    var video = document.querySelector("video");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas
+      .getContext("2d")
+      .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+  
+    /** Code to merge image **/
+    /** For instance, if I want to merge a play image on center of existing image **/
+    const playImage = new Image();
+    playImage.src = "path to image asset";
+    playImage.onload = () => {
+      const startX = video.videoWidth / 2 - playImage.width / 2;
+      const startY = video.videoHeight / 2 - playImage.height / 2;
+      canvas
+        .getContext("2d")
+        .drawImage(playImage, startX, startY, playImage.width, playImage.height);
+      canvas.toBlob() = (blob) => {
+        const img = new Image();
+        img.src = window.URL.createObjectUrl(blob);
+      };
+    };
+    /** End **/
+  }
+  
+  capture();
+  
+    // --------------------------------------------
     let idMConNombreSilueta=new Map([
     [1,"perfil"],
     [2,"serio"],
@@ -231,30 +337,7 @@
       document.getElementById(idMConNombreSilueta.get(idImagen)).style.cssText += "display:block";   
     }
 
-    $(document).ready(function() {
-      asignarSiluetaCorrespondiente();
-    });
-
-    async function onPlay() {
-      const videoEl = $('#inputVideo').get(0)
-
-      if(videoEl.paused || videoEl.ended )
-        return setTimeout(() => onPlay())
-        setTimeout(() => onPlay())
-    }
-
-    async function run() {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
-      const videoEl = $('#inputVideo').get(0)
-      videoEl.srcObject = stream
-    }
-
-    $(document).ready(function() {
-      asignarSiluetaCorrespondiente();
-      run()
-    })
-
-    function capture() {
+    function capturar() {
       localStorage.setItem("cantImagenes",parseInt(localStorage.getItem("cantImagenes")+1));
       var canvas = document.getElementById("canvas");
       canvas.style.display = "none";

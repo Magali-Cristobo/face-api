@@ -12,13 +12,14 @@ app.use(express.static(viewsDir))
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, '../images')))
 app.use(express.static(path.join(__dirname, '../media')))
-app.use(express.static(path.join(__dirname, '../../weights')))
-app.use(express.static(path.join(__dirname, '../../dist')))
+app.use(express.static(path.join(__dirname, '../weights')))
+app.use(express.static(path.join(__dirname, '../dist')))
 
 app.get('/', (req, res) => res.redirect('/inicio'))
-app.get('/inicio', (req, res) => res.sendFile(path.join(viewsDir, 'inicio.html')))
+app.get('/inicio', (req, res) => res.sendFile(path.join(viewsDir, 'index.html')))
 app.get('/capturar', (req, res) => res.sendFile(path.join(viewsDir, 'tomarFoto.html')))
 app.get('/editar', (req, res) => res.sendFile(path.join(viewsDir, 'fotoCapturada.html')))
+
 
 app.listen(3000, () => console.log('Listening on port 3000!'))
 
