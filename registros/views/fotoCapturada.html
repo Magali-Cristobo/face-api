@@ -147,7 +147,18 @@
         img.id = "imagen";
         img.src = localStorage.getItem("imagen"+idImagen);
       }
-      location.href="http://localhost:3000/";
+      if(localStorage.getItem("idImagen") < 8 ){
+          localStorage.setItem("idImagen", parseInt(localStorage.getItem("idImagen"))+1);
+          if(localStorage.getItem(("imagen")+parseInt(localStorage.getItem("idImagen"))) != null){
+            location.href="http://localhost:3000/editar"; 
+          }
+          else{
+            location.href="http://localhost:3000/capturar";
+          }
+      }
+      else{
+        location.href="http://localhost:3000/";
+      }
 
     }
 
