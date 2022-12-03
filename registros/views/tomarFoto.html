@@ -187,6 +187,15 @@
 </head>
 <body>
   <div class="container">
+    <br>
+    <div class="row">
+      <h3 style="text-align: center;color:white;">Titulo foto capturada</h3>
+    </div>
+    <br>
+    <div class="row">
+      <h7 id="textoSonrisa" style="visibility:hidden;text-align: center;color:white;">Sonreí un poco más</h7>
+
+    </div>
     <div class="row">
       <div class="col s12 l8 offset-l2">
         <div style="position: relative;" class="">
@@ -208,7 +217,6 @@
       <div class="col s10 l8 offset-s1 offset-l2">
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('./fotosBotones/cancelar.png')"  id="cancelar"></button> 
-          <label id="textoSonrisa" style="visibility:hidden;">Sonreí !!!</label>
           <button class="boton" onclick="capturar()" style="background: url('./fotosBotones/circulo.png');" id="capturar"></button> 
         </div>
       </div>
@@ -260,7 +268,7 @@
           $('#textoSonrisa').get(0).style.visibility = "visible";
         }
         if(localStorage.getItem("idImagen") == 2){
-          $('#textoSonrisa').get(0).innerHTML = "No sonrias !!";
+          $('#textoSonrisa').get(0).innerHTML = "Mantenete serio";
           // $('#textoSonrisa').get(0).style.visibility = "hidden";
         }
         // faceapi.draw.drawFaceExpressions(canvas, resizedResult, minConfidence) lo comento pero tb se puede dejar
