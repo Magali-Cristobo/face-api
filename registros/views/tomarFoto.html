@@ -10,6 +10,8 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/7637a6_216683f7d2ad462083dd23288f17ba17%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7637a6_216683f7d2ad462083dd23288f17ba17%7Emv2.png">
   <title>All Right</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
 
   <style>
     body {
@@ -188,6 +190,7 @@
 <body>
   <div class="container">
     <br>
+    <br>
     <div class="row">
       <h3 style="text-align: center;color:white;">Titulo foto capturada</h3>
     </div>
@@ -218,15 +221,31 @@
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('./fotosBotones/cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capturar()" style="background: url('./fotosBotones/circulo.png');" id="capturar"></button> 
+          <button class="boton" onclick="activarEspejo()" style="visibility:hidden;background: url('./fotosBotones/espejoTachado.png');" id="espejo"></button>
         </div>
       </div>
     </div>
   </div>
   </body>
   <script>
+    let espejoActivado = false
     let forwardTimes = []
     let withBoxes = true
 
+    function activarEspejo(){
+      if(!espejoActivado){ 
+        alert("Se ha activado la opción espejo")
+
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejo.png')"
+        espejoActivado = true
+      }else{
+        alert("Se ha desactivado la opción espejo")
+
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejoTachado.png')"
+        espejoActivado = false
+
+      }
+    }
     function updateTimeStats(timeInMs) {
       forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
       const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
@@ -257,6 +276,10 @@
         const minConfidence = 0.05
         if (withBoxes) {
           // faceapi.draw.drawDetections(canvas, resizedResult)
+        }
+        if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
+          alert("La opción espejo está desactivada")
+          $('#espejo').get(0).style.visibility = "visible";
         }
         if(JSON.stringify(resizedResult.expressions.happy )> 0.95 && localStorage.getItem("idImagen") == 3 || JSON.stringify(resizedResult.expressions.happy )< 0.95 && localStorage.getItem("idImagen") == 2){
           $('#capturar').get(0).style.visibility = "visible";
@@ -354,6 +377,8 @@
       canvas.height = video.videoHeight;
       canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
       let image = canvas.toDataURL('image/jpeg');
+      //Ac;a habira que fijarse ocmo estala variable espejoActivado. Si es true y el getIDiMAGEN ES maxilar entonces rotarla de una forma, si es true y el get
+      // idMImagen es el otro, rotarlode la otra forma y sino, no hacer nada
       localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
       location.href="http://localhost:3000/editar";
     }
