@@ -234,12 +234,12 @@
 
     function activarEspejo(){
       if(!espejoActivado){ 
-        alert("Se ha activado la opción espejo")
+        alert("Se ha activado la opción espejo") 
 
         $('#espejo').get(0).style.background = "url('./fotosBotones/espejo.png')"
         espejoActivado = true
       }else{
-        alert("Se ha desactivado la opción espejo")
+       alert("Se ha desactivado la opción espejo")
 
         $('#espejo').get(0).style.background = "url('./fotosBotones/espejoTachado.png')"
         espejoActivado = false
@@ -277,10 +277,7 @@
         if (withBoxes) {
           // faceapi.draw.drawDetections(canvas, resizedResult)
         }
-        if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
-          alert("La opción espejo está desactivada")
-          $('#espejo').get(0).style.visibility = "visible";
-        }
+       
         if(JSON.stringify(resizedResult.expressions.happy )> 0.95 && localStorage.getItem("idImagen") == 3 || JSON.stringify(resizedResult.expressions.happy )< 0.95 && localStorage.getItem("idImagen") == 2){
           $('#capturar').get(0).style.visibility = "visible";
           $('#textoSonrisa').get(0).style.visibility = "hidden";
@@ -316,6 +313,12 @@
     function updateResults() {}
 
     $(document).ready(function() {
+      espejoActivado =false;
+      alert("La opción espejo está desactivada");
+      if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
+          
+        $('#espejo').get(0).style.visibility = "visible";
+      }
       initFaceDetectionControls()
       asignarSiluetaCorrespondiente();
 
