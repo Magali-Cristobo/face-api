@@ -314,14 +314,12 @@
 
     $(document).ready(function() {
       espejoActivado =false;
-      alert("La opción espejo está desactivada");
       if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
-          
+        alert("La opción espejo está desactivada");
         $('#espejo').get(0).style.visibility = "visible";
       }
       initFaceDetectionControls()
       asignarSiluetaCorrespondiente();
-
       run()
     })
     
@@ -333,9 +331,6 @@
     canvas
       .getContext("2d")
       .drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-  
-    /** Code to merge image **/
-    /** For instance, if I want to merge a play image on center of existing image **/
     const playImage = new Image();
     playImage.src = "path to image asset";
     playImage.onload = () => {
@@ -349,7 +344,6 @@
         img.src = window.URL.createObjectUrl(blob);
       };
     };
-    /** End **/
   }
   
   capture();
@@ -383,6 +377,7 @@
       //Ac;a habira que fijarse ocmo estala variable espejoActivado. Si es true y el getIDiMAGEN ES maxilar entonces rotarla de una forma, si es true y el get
       // idMImagen es el otro, rotarlode la otra forma y sino, no hacer nada
       localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
+      localStorage.setItem("espejo", espejoActivado);
       location.href="http://localhost:3000/editar";
     }
 

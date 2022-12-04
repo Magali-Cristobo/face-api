@@ -135,6 +135,32 @@
     }
 
     function aceptar(){
+      if(localStorage.getItem("espejo") == "true"){
+        if(click == 0){
+          cropper = new Cropper(img, {
+            ready() {
+              cropper.scaleX(-1);
+              let imgSrc=cropper.getCroppedCanvas({
+                width: img.naturalWidth, 
+                height: img.naturalHeight
+              }).toDataURL('image/jpeg');
+              localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+              img.src = imgSrc;
+              guardarImagen();
+            }
+          });
+        }
+        else{
+          cropper.scaleX(-1);
+          guardarImagen();
+        }
+      }
+      else{
+        guardarImagen();
+      }
+    }
+
+    function guardarImagen(){
       if (click == 1){
         let imgSrc=cropper.getCroppedCanvas({
           width: img.naturalWidth, 
@@ -159,7 +185,6 @@
       else{
         location.href="http://localhost:3000/";
       }
-
     }
 
     function insertarImagen(){
