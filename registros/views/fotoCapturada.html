@@ -41,6 +41,7 @@
 
     $(document).ready(function() {
       insertarImagen();
+      espejarImagen();
     })
 
     function recortar(){
@@ -73,33 +74,26 @@
       img.src = imgSrc;
     }
 
-    function aceptar(){
+    function espejarImagen(){
       if(localStorage.getItem("espejo") == "true"){
-        if(click == 0){
-          cropper = new Cropper(img, {
-            ready() {
-              cropper.scaleX(-1);
-              let imgSrc=cropper.getCroppedCanvas({
-                width: img.naturalWidth, 
-                height: img.naturalHeight
-              }).toDataURL('image/jpeg');
-              localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
-              img.src = imgSrc;
-              guardarImagen();
-            }
-          });
-        }
-        else{
-          cropper.scaleX(-1);
-          guardarImagen();
-        }
-      }
-      else{
-        guardarImagen();
+        click =1;
+        cropper = new Cropper(img, {
+          ready() {
+            cropper.scaleX(-1);
+            cropper.width = 640;
+            let imgSrc=cropper.getCroppedCanvas({
+              width: img.naturalWidth, 
+              height: img.naturalHeight
+            }).toDataURL('image/jpeg');
+            localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), imgSrc);
+            img.src = imgSrc;
+          }
+        });
       }
     }
 
-    function guardarImagen(){
+    function aceptar(){
+      localStorage.setItem("espejo", "false");
       if (click == 1){
         let imgSrc=cropper.getCroppedCanvas({
           width: img.naturalWidth, 

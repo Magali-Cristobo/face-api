@@ -12,9 +12,6 @@
   <title>All Right</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
   <link rel="stylesheet" href="estilosTomarFoto.css">
-
-
-  
 </head>
 <body>
   <div class="container">
@@ -49,7 +46,6 @@
         <div class="center">
           <button class="boton" onclick="cancelar()"  style="background: url('./fotosBotones/cancelar.png')"  id="cancelar"></button> 
           <button class="boton" onclick="capturar()" style="background: url('./fotosBotones/circulo.png');" id="capturar"></button> 
-          <button class="boton" onclick="activarEspejo()" style="visibility:hidden;background: url('./fotosBotones/espejoTachado.png');" id="espejo"></button>
         </div>
       </div>
     </div>
@@ -140,11 +136,24 @@
 
     function updateResults() {}
 
+    function toast() {
+      if(!espejoActivado){ 
+        Materialize.toast('Se ha activado la opción espejo', 2000); 
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejo.png')"
+        espejoActivado = true
+      }
+      else{
+        Materialize.toast('Se ha desactivado la opción espejo', 2000);  
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejoTachado.png')"
+        espejoActivado = false
+      }
+    }
+
     $(document).ready(function() {
       espejoActivado =false;
-      if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
-       // $(".container").append='<div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true"><div class="d-flex"><div class="toast-body"> La opción espejo está desactivada </div> <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> </div> </div>'
-        $('#espejo').get(0).style.visibility = "visible";
+      if(localStorage.getItem("idImagen") == 4 || localStorage.getItem("idImagen") == 5 || localStorage.getItem("idImagen") == 6 || localStorage.getItem("idImagen") == 8){
+        Materialize.toast('La opcion espejo se encuentra desactivada', 2000);  
+        $('.center').append ('<button class="boton" onclick="toast()" id="espejo"></button>' );
       }
       initFaceDetectionControls()
       asignarSiluetaCorrespondiente();
