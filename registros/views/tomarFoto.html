@@ -60,7 +60,7 @@
       if(!espejoActivado){ 
         alert("Se ha activado la opción espejo") 
 
-        $('#espejo').get(0).style.background = "url('./fotosBotones/espejo.png')"
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejoBlanco.png')"
         espejoActivado = true
       }else{
        alert("Se ha desactivado la opción espejo")
@@ -139,7 +139,7 @@
     function toast() {
       if(!espejoActivado){ 
         Materialize.toast('Se ha activado la opción espejo', 2000); 
-        $('#espejo').get(0).style.background = "url('./fotosBotones/espejo.png')"
+        $('#espejo').get(0).style.background = "url('./fotosBotones/espejoBlanco.png')"
         espejoActivado = true
       }
       else{
@@ -211,8 +211,6 @@
       canvas.height = video.videoHeight;
       canvas.getContext("2d").drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
       let image = canvas.toDataURL('image/jpeg');
-      //Ac;a habira que fijarse ocmo estala variable espejoActivado. Si es true y el getIDiMAGEN ES maxilar entonces rotarla de una forma, si es true y el get
-      // idMImagen es el otro, rotarlode la otra forma y sino, no hacer nada
       localStorage.setItem("imagen"+ parseInt(localStorage.getItem("idImagen")), image);
       localStorage.setItem("espejo", espejoActivado);
       location.href="http://localhost:3000/editar";
