@@ -27,14 +27,14 @@
     #frenteSonriendo{
       position: absolute;
       display: none;
-      top: 45%;
+      top: 60%;
       left: 50%;
     }
     #cerradoIzq{
       width: 174px;
       height: 274px;
       position: absolute;
-      top: 45%;
+      top: 60%;
       left: 50%;
       display: none;
     }
@@ -42,28 +42,28 @@
       width: 174px;
       height: 274px;
       position: absolute;
-      top: 45%;
+      top: 60%;
       left: 50%;
       display: none;
     }
 
     #maxInferior{
       position: absolute;
-      top: 56%;
+      top: 70%;
       left: 50%;
       display: none;
     }
 
     #maxSuperior{
       position: absolute;
-      top: 44%;
+      top: 58%;
       left: 50%;
       display: none;
     }
 
     #caraSonriendo{
       position: absolute;
-      top: 39%;
+      top: 51%;
       left: 50%;
       display: none;
     }
@@ -76,7 +76,7 @@
     }
     #perfil{
       position: absolute;
-      top: 39%;
+      top: 53%;
       left: 50%;
       display: none;
     }
@@ -164,7 +164,7 @@
 
       #caraSonriendo{
         position: absolute;
-        top: 41%;
+        top: 60%;
         left: 55%;
         width:74%;
         display: none;
@@ -180,7 +180,7 @@
       #perfil{
         position: absolute;
         top: 42%;
-        left: 52%;
+        left: 53%;
         width: 61%;
         display: none;
       }
@@ -189,14 +189,13 @@
 </head>
 <body>
   <div class="container">
-    <br>
+  
     <br>
     <div class="row">
-      <h3 style="text-align: center;color:white;">Titulo foto capturada</h3>
+      <h3 style="text-align: center;color:white;padding-top:2%">Titulo foto capturada</h3>
     </div>
-    <br>
     <div class="row">
-      <h7 id="textoSonrisa" style="visibility:hidden;text-align: center;color:white;">Sonreí un poco más</h7>
+      <h5 id="textoSonrisa" style="visibility:hidden;text-align: center;color:white;">Sonreí un poco más</h7>
 
     </div>
     <div class="row">
@@ -315,7 +314,7 @@
     $(document).ready(function() {
       espejoActivado =false;
       if(localStorage.getItem("idImagen") == 1 || localStorage.getItem("idImagen") == 2){
-        alert("La opción espejo está desactivada");
+       // $(".container").append='<div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true"><div class="d-flex"><div class="toast-body"> La opción espejo está desactivada </div> <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button> </div> </div>'
         $('#espejo').get(0).style.visibility = "visible";
       }
       initFaceDetectionControls()
