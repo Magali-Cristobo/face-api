@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#2b3441;
+  }
+  #frenteSonriendo{
+    position: absolute;
+    display: none;
+    top: 60%;
+    left: 50%;
+  }
+  #cerradoIzq{
+    width: 174px;
+    height: 274px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    display: none;
+  }
+  #cerradoDer{
+    width: 174px;
+    height: 274px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    display: none;
+  }
+
+  #maxInferior{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    display: none;
+  }
+
+  #maxSuperior{
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    display: none;
+  }
+
+  #caraSonriendo{
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    display: none;
+  }
+
+  #serio{
+    position: absolute;
+    top: 39%;
+    left: 50%;
+    display: none;
+  }
+  #perfil{
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    display: none;
+  }
+
+  canvas {
+    position: absolute;
+  }
+  .silueta{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    z-index: 1;
+  }
+
+  .boton{
+    width: 70px;
+    height: 85px;
+    background-size: cover !important;
+    border:0;
+  }
+  
+  .center{
+    text-align:center;
+    z-index: 10;
+  }
+  
+  .center button{
+    display:inline-block;
+    margin-left:30px;
+    margin-right:30px; 
+  }
+  #inputVideo{
+    width: 100%;
+  }
+  @media (max-width:450px)  {
+    .boton{
+      width: 55px;
+      height: 66px;
+      background-size: inherit;
+      border:0;
+    }
+    .center button{
+      display:inline-block;
+      margin-left:10px;
+      margin-right:10px; 
+    }
+    #frenteSonriendo{
+      position: absolute;
+      display: none;
+      top: 47%;
+      left: 50%;
+      width: 61%;
+    }
+    #cerradoIzq{
+      width: 20%;
+      height: 18%;
+      position: absolute;
+      top: 47%;
+      left: 53%;
+      display: none;
+    }
+    #cerradoDer{
+      width: 20%;
+      height: 18%;
+      position: absolute;
+      top: 47%;
+      left: 53%;
+      display: none;
+    }
+
+    #maxInferior{
+      position: absolute;
+      top: 48%;
+      left: 52%;
+      width: 42%;
+      display: none;
+    }
+
+    #maxSuperior{
+      position: absolute;
+      top: 44%;
+      left: 52%;
+      width: 47%;
+      display: none;
+    }
+
+    #caraSonriendo{
+      position: absolute;
+      top: 60%;
+      left: 55%;
+      width:74%;
+      display: none;
+    }
+
+    #serio{
+      position: absolute;
+      top: 42%;
+      left: 53%;
+      width: 80%;
+      display: none;
+    }
+    #perfil{
+      position: absolute;
+      top: 42%;
+      left: 53%;
+      width: 61%;
+      display: none;
+    }
+  }
