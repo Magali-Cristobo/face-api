@@ -26,6 +26,9 @@ li{
     position: absolute;
     right: 1%;
 }
+i, a{
+    padding: 5px;
+}
 
 @media (max-width:450px)  {
     #footer a{
@@ -36,8 +39,14 @@ li{
         right: 2%;
     }
 }
-i, a{
-    padding: 5px;
+@media (max-width:400px)  {
+    #footer a{
+        font-size: 14px;
+    }
+    .botonNav{
+        position: absolute;
+        right: 2%;
+    }
 }
 
 .sidenav {

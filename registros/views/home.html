@@ -18,7 +18,6 @@
     <a href="#">Configuracion</a>
     <a href="#">Cerrar Sesión</a>
   </div>
-  <div class="container">
     <nav class="navbar navbar-dark navbar-expand-lg nav">
         <div class="container-fluid">
           <span style="font-size:30px;cursor:pointer" id="desplegable" onclick="openNav()">&#9776;</span>
@@ -29,9 +28,7 @@
         <a class="navbar-brand" href="#">  <i class="bi bi-columns-gap"></i> </br> Panel de control</a>
         <a class="navbar-brand" href="#"><i class="bi bi-plus-square"></i>  </br>Agregar paciente</a>
         <a class="navbar-brand" href="#"> <i class="bi bi-person-lines-fill"></i></br>Pacientes</a>
-      </nav>
-  </div>
-  
+      </nav>  
 </body>
 <script> 
   function openNav() {
@@ -40,7 +37,7 @@
   
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementsByClassName("container").style.marginLeft= "0";
+    document.getElementsByClassName("container")[0].style.marginLeft= "0";
   }
  </script>
 </body>
