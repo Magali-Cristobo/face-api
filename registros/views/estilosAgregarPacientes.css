@@ -1,0 +1,21 @@
+.agregarPaciente{
+    background-color:#5ab9a1 ;
+}
+
+.botones{
+    position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.boton{
+    width: 100%;
+    height: 100%;
+}
+
+#botonRecomendacion{
+    margin-bottom: 3%;
+}
+
