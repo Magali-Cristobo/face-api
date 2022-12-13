@@ -92,3 +92,7 @@ i, a{
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+  html, body {
+    margin: 0;
+    height: 100%;
+}
