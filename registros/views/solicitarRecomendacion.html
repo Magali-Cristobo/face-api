@@ -11,6 +11,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="estilosHome.css">
   <link rel="stylesheet" href="estilosAgregarPacientes.css">
+  <link rel="stylesheet" href="estilosSolicitarRecomendacion.css">
+
 
 </head>
 <body>
@@ -29,7 +31,7 @@
     <div class="container" style=" background-color:  white; color: #5ab9a1; border-radius: 3px;">
         <p style="padding: 10px;">Dr./Dra. Cavilieri </br> / Solicitar Recomendacion</p>
     </div>
-    <h2 style="color:#5ab9a1">Solicitar recomendación</h2>
+    <!-- <h2 style="color:#5ab9a1">Solicitar recomendación</h2>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -38,9 +40,162 @@
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
-      </nav>
+      </nav> -->
+
+      <div class="stepwizard col-12">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step col-2 ">
+            <a href="#step-1" type="button" class="btn btn-circle botonPasoActivo">1</a>
+            <p class="descripcionBoton">Clinica</p>
+          </div>
+          <div class="stepwizard-step col-2">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle botonPaso" disabled="disabled">2</a>
+            <p class="descripcionBoton">Paciente</p>
+          </div>
+          <div class="stepwizard-step col-2">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle botonPaso" disabled="disabled">3</a>
+            <p class="descripcionBoton">Consulta</p>
+          </div>
+          <div class="stepwizard-step col-2">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle botonPaso" disabled="disabled">4</a>
+            <p class="descripcionBoton">Fotos</p>
+          </div>
+          <div class="stepwizard-step col-2">
+            <a href="#step-5" type="button" class="btn btn-default btn-circle botonPaso" disabled="disabled">5</a>
+            <p class="descripcionBoton">Rx</p>
+          </div>
+          <div class="stepwizard-step col-2">
+            <a href="#step-6" type="button" class="btn btn-default btn-circle botonPaso" disabled="disabled">6</a>
+            <p  class="descripcionBoton">Confirmar</p>
+          </div>
+        </div>
+      </div>
+      
+      <form role="form" action="" method="post">
+        <div class="row setup-content" id="step-1">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3 class="descripcionBoton" >Clínica</h3>
+              <div class="form-group">
+                <label class="control-label tituloColor">Consultorio</label>
+                <br>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option class="tituloColor">- Elija una opción -</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <br>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
+            </div>
+          </div>
+        </div>
+        <div class="row setup-content" id="step-2">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3 class="descripcionBoton">Datos personales</h3>
+              <div class="form-group">
+                <label class="control-label descripcionBoton">Nombre</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Nombre">
+              </div>
+              <div class="form-group">
+                <label class="control-label descripcionBoton">Inicial del segundo nombre</label>
+                <input maxlength="1" type="text" class="form-control" placeholder="Inicial segundo nombre">
+              </div>
+              <div class="form-group">
+                <label class="control-label descripcionBoton">Apellidos</label>
+                <input maxlength="1" type="text" required="required" class="form-control" placeholder="Apellido">
+              </div>
+              <div class="form-group">
+                <label class="control-label descripcionBoton">Fecha de nacimiento</label>
+                <input  type="datetime" required="required" class="form-control" placeholder="Fecha de nacimiento">
+              </div>
+              <div class="form-group">
+                <label class="control-label descripcionBoton ">Sexo</label>
+                <br>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option >- Seleccionar género -</option>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                  <option>No especifica</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label descripcionBoton">Enviar a</label>
+                <input type="text" required="required" class="form-control" placeholder="Ingrese dirección">
+              </div>
+              <br>
+              <button class="btn prevBtn btn-lg pull-left" id="anterior" type="button"><- Anterior</button>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
+              <br>
+            </div>
+          </div>
+        </div>
+        <div class="row setup-content" id="step-3">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3>Consulta</h3>
+              <div class="form-group">
+                <label class="control-label">Company Name</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Company Address</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
+              </div>
+              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="row setup-content" id="step-4">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3>Fotos</h3>
+              <div class="form-group">
+                <label class="control-label">Company Name</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Company Address</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
+              </div>
+              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="row setup-content" id="step-5">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3>Rx</h3>
+              <div class="form-group">
+                <label class="control-label">Company Name</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Company Address</label>
+                <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
+              </div>
+              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="row setup-content" id="step-6">
+          <div class="col-xs-6 col-md-offset-3">
+            <div class="col-md-12">
+              <h3>Confirmar</h3>
+              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
+              <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
   </div>
-  <nav class="navbar fixed-bottom navbar-dark" id="footer">
+  <nav class="navbar navbar-dark" id="footer">
     <a class="navbar-brand" href="home.html">  <i class="bi bi-columns-gap"></i> </br> Panel de control</a>
     <a class="navbar-brand" href="agregarPacientes.html"><i class="bi bi-plus-square"></i>  </br>Agregar paciente</a>
     <a class="navbar-brand" href="#"> <i class="bi bi-person-lines-fill"></i></br>Pacientes</a>
@@ -55,6 +210,64 @@
     document.getElementById("mySidenav").style.width = "0";
     document.getElementsByClassName("container")[0].style.marginLeft= "0";
   }
+
+  $(document).ready(function () {
+    var navListItems = $('div.setup-panel div a'),
+            allWells = $('.setup-content'),
+            allNextBtn = $('.nextBtn'),
+          allPrevBtn = $('.prevBtn');
+  
+    allWells.hide();
+  
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+                $item = $(this);
+  
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('botonPasoActivo').addClass('btn-default');
+            $item.addClass('botonPasoActivo');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+    
+    allPrevBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            
+            prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+
+  
+            prevStepWizard.removeAttr('disabled').trigger('click');
+            prevStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
+    });
+  
+    allNextBtn.click(function(){
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+  
+        
+        $(".form-group").removeClass("has-error");
+        for(var i=0; i<curInputs.length; i++){
+            if (!curInputs[i].validity.valid){
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+  
+        if (isValid){ 
+            nextStepWizard.removeAttr('disabled').trigger('click');
+            nextStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
+        }
+    });
+  
+    $('div.setup-panel div a.botonPasoActivo').trigger('click');
+  });
  </script>
 </body>
 </html
