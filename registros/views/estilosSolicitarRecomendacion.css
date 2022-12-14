@@ -63,9 +63,4 @@
     background-color: #5ab9a1;
     color: white;
 } 
-#footer{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-}
+#footer { position: fixed; bottom: 0px; width: 100%; }
