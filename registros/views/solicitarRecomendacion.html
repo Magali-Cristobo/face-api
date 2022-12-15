@@ -92,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="row setup-content" id="step-2">
+        <div class="row setup-content" id="step-2" style="margin-bottom: 12%;">
           <div class="col-xs-6 col-md-offset-3">
             <div class="col-md-12">
               <h3 class="descripcionBoton">Datos personales</h3>
@@ -136,60 +136,64 @@
         <div class="row setup-content" id="step-3">
           <div class="col-xs-6 col-md-offset-3">
             <div class="col-md-12">
-              <h3>Consulta</h3>
+              <h3 class="descripcionBoton">Consulta</h3>
               <div class="form-group">
-                <label class="control-label">Company Name</label>
+                <label class="control-label descripcionBoton">Company Name</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
               </div>
               <div class="form-group">
-                <label class="control-label">Company Address</label>
+                <label class="control-label descripcionBoton">Company Address</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
               </div>
-              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </br>
+              <button class="btn prevBtn btn-lg pull-left" id="anterior" type="button"><- Anterior</button>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
             </div>
           </div>
         </div>
         <div class="row setup-content" id="step-4">
           <div class="col-xs-6 col-md-offset-3">
             <div class="col-md-12">
-              <h3>Fotos</h3>
+              <h3 class="descripcionBoton">Fotos</h3>
               <div class="form-group">
-                <label class="control-label">Company Name</label>
+                <label class="control-label descripcionBoton">Company Name</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
               </div>
               <div class="form-group">
-                <label class="control-label">Company Address</label>
+                <label class="control-label descripcionBoton">Company Address</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
               </div>
-              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </br>
+              <button class="btn prevBtn btn-lg pull-left" id="anterior" type="button"><- Anterior</button>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
             </div>
           </div>
         </div>
         <div class="row setup-content" id="step-5">
           <div class="col-xs-6 col-md-offset-3">
             <div class="col-md-12">
-              <h3>Rx</h3>
+              <h3 class="descripcionBoton">Rx</h3>
               <div class="form-group">
-                <label class="control-label">Company Name</label>
+                <label class="control-label descripcionBoton">Company Name</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name">
               </div>
               <div class="form-group">
-                <label class="control-label">Company Address</label>
+                <label class="control-label descripcionBoton">Company Address</label>
                 <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address">
               </div>
-              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            </br>
+              <button class="btn prevBtn btn-lg pull-left" id="anterior" type="button"><- Anterior</button>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
             </div>
           </div>
         </div>
         <div class="row setup-content" id="step-6">
           <div class="col-xs-6 col-md-offset-3">
             <div class="col-md-12">
-              <h3>Confirmar</h3>
-              <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
-              <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+              <h3 class="descripcionBoton">Confirmar</h3>
+            </br>
+              <button class="btn prevBtn btn-lg pull-left" id="anterior" type="button"><- Anterior</button>
+              <button class="btn nextBtn btn-lg pull-right" id="siguiente" type="button">Siguiente -></button>
             </div>
           </div>
         </div>
@@ -242,14 +246,18 @@
   
             prevStepWizard.removeAttr('disabled').trigger('click');
             prevStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"),
+            nextStepWizard.addClass('botonPaso');            
+
     });
   
     allNextBtn.click(function(){
         var curStep = $(this).closest(".setup-content"),
             curStepBtn = curStep.attr("id"),
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
+            
+            /* curInputs = curStep.find("input[type='text'],input[type='url']"),
   
         
         $(".form-group").removeClass("has-error");
@@ -259,10 +267,12 @@
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
         }
-  
+  */
         if (isValid){ 
             nextStepWizard.removeAttr('disabled').trigger('click');
             nextStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
+            prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"); // como estoy en el siguiente ahora busco el anterior para ponerlo gris
+            prevStepWizard.addClass('botonPaso');            
         }
     });
   
