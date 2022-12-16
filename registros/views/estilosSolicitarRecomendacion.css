@@ -38,6 +38,7 @@
     line-height: 1.428571429;
     border-radius: 15px;
     background-color: grey;
+    pointer-events: none;
 }
 .botonPasoActivo {
     width: 30px;
