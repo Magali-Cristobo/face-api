@@ -41,7 +41,6 @@
           <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
       </nav> -->
-
       <div class="stepwizard col-12">
         <div class="stepwizard-row setup-panel">
           <div class="stepwizard-step col-2 ">
@@ -70,7 +69,6 @@
           </div>
         </div>
       </div>
-      
       <form role="form" action="" method="post">
         <div class="row setup-content" id="step-1">
           <div class="col-xs-6 col-md-offset-3">
@@ -212,8 +210,7 @@
   
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    // document.getElementsByClassName("container")[0].style.marginLeft= "0";
-    document.getElementsById("mySidenav").style.marginLeft= "0";
+    document.getElementById("mySidenav").style.marginLeft= "0";
   }
 
   $(document).ready(function () {
@@ -253,28 +250,30 @@
     });
   
     allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            isValid = true;
-            
-            /* curInputs = curStep.find("input[type='text'],input[type='url']"),
-  
-        
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
+      var curStep = $(this).closest(".setup-content"),
+      curStepBtn = curStep.attr("id"),
+      nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+      isValid = true;
+      curInputs = curStep.find("input[type='text'],input[type='url'], input[type='datetime']"),
+      select = curStep.find("select");
+      // hay que ver como podemos verificar que haya elegido una opcion
+      if(select != "" && select.value == "- Elija una opción -" || select.value == "- Seleccionar género -"){
+        isValid = false;
+      }
+
+      $(".form-group").removeClass("has-error");
+      for(var i=0; i<curInputs.length; i++){
+        if (!curInputs[i].validity.valid){
+          isValid = false;
+          $(curInputs[i]).closest(".form-group").addClass("has-error");
         }
-  */
-        if (isValid){ 
-            nextStepWizard.removeAttr('disabled').trigger('click');
-            nextStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
-            prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"); // como estoy en el siguiente ahora busco el anterior para ponerlo gris
-            prevStepWizard.addClass('botonPaso');            
-        }
+      }
+      if (isValid){ 
+          nextStepWizard.removeAttr('disabled').trigger('click');
+          nextStepWizard.removeClass('botonPaso').addClass('botonPasoActivo');
+          prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().children("a"); // como estoy en el siguiente ahora busco el anterior para ponerlo gris
+          prevStepWizard.addClass('botonPaso');            
+      }
     });
   
     $('div.setup-panel div a.botonPasoActivo').trigger('click');
