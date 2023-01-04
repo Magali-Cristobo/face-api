@@ -59,8 +59,8 @@
                         <h5 class="modal-title" id="exampleModalLabel">¿Como quiere continuar?</h5>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-active"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalDescargar">Descargar imagenes </button>
-                      <button type="button" class="btn btn-active" onclick="pedirRecomendacion()" data-bs-dismiss="modal">Pedir recomendacion</button>
+                      <button type="button" class="btn btn-active"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalDescargar">Exportar</button>
+                      <button type="button" class="btn btn-active" onclick="pedirRecomendacion()" data-bs-dismiss="modal">Cargar registros</button>
                     </div>
                   </div>
                 </div>
@@ -106,8 +106,10 @@
         }
 
         function pedirRecomendacion(){
-            location.href="https://dr.allright.com.ar/accounts/login/?next=/";
+          localStorage.setItem("fotosCapturadas", "true");    
+          location.href="http://localhost:3000/solicitarRecomendacion.html";
         }
+
         function insertarImagen(){
             var i = 0;
             var idImagen = 0;
@@ -124,6 +126,9 @@
             if(cantImagenes == 8){
                 document.getElementById("botonDescargar").style.display="block";
                 document.getElementById("4").scrollIntoView();
+            }
+            else{
+              localStorage.setItem("fotosCapturadas", "false");    
             }
         }
         

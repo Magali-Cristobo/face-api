@@ -15,8 +15,14 @@ app.use(express.static(path.join(__dirname, '../media')))
 app.use(express.static(path.join(__dirname, '../weights')))
 app.use(express.static(path.join(__dirname, '../dist')))
 
-app.get('/', (req, res) => res.redirect('/inicio'))
-app.get('/inicio', (req, res) => res.sendFile(path.join(viewsDir, 'index.html')))
+// app.get('/', (req, res) => res.redirect('/inicio'))
+
+
+app.get('/', function(req, res){
+  res.redirect('/inicio');
+});
+
+app.get('/inicio', (req, res) => res.sendFile(path.join(viewsDir, 'home.html')))
 app.get('/capturar', (req, res) => res.sendFile(path.join(viewsDir, 'tomarFoto.html')))
 app.get('/editar', (req, res) => res.sendFile(path.join(viewsDir, 'fotoCapturada.html')))
 
