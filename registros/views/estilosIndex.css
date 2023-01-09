@@ -16,10 +16,17 @@
 }
 @media (max-width:575px) {
     .boton{
-        height: 125px;
+        height: 63px;
     }
     .divBoton{
         padding-bottom: 2%;
+    }
+    .imagen{
+        height:11rem;
+    }
+    .columna{
+        padding-right: 0px;
+        padding-left: 0px; /* con uno no queda mal tampoco */
     }
 }
 nav{
