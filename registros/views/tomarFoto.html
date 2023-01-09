@@ -31,14 +31,22 @@
           <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
           <canvas id="overlay" style=" left:0;">
         </div>
-        <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/cerradoIzq.png"/>
+        <!-- <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/cerradoIzq.png"/>
         <img class="silueta" id="cerradoDer" src="imagenesSiluetas/cerradoDer.png"/>
         <img class="silueta" id="serio" src="imagenesSiluetas/serio.png"/>
         <img class="silueta" id="caraSonriendo" src="imagenesSiluetas/caraSonriendo.png"/>
         <img class="silueta" id="maxInferior" src="imagenesSiluetas/maxInferior.png"/>
         <img class="silueta" id="maxSuperior" src="imagenesSiluetas/maxSuperior.png"/>
         <img class="silueta" id="perfil" src="imagenesSiluetas/perfil.png"/>
-        <img class="silueta" id="frenteSonriendo" src="imagenesSiluetas/frenteSonriendo.png"/>
+        <img class="silueta" id="frenteSonriendo" src="imagenesSiluetas/frenteSonriendo.png"/> -->
+        <img class="silueta" id="cerradoIzq" src="imagenesSiluetas/ar-dientes-perf-iz.png"/>
+        <img class="silueta" id="cerradoDer" src="imagenesSiluetas/ar-dientes-perf-d.png"/>
+        <img class="silueta" id="serio" src="imagenesSiluetas/ar-boca-cerrada-01.png"/>
+        <img class="silueta" id="caraSonriendo" src="imagenesSiluetas/ar-boca-sonrisa-01.png"/>
+        <img class="silueta" id="maxInferior" src="imagenesSiluetas/ar-maxilar-inf-01.png"/>
+        <img class="silueta" id="maxSuperior" src="imagenesSiluetas/ar-maxilar-sup-01.png"/>
+        <img class="silueta" id="perfil" src="imagenesSiluetas/ar-perfil-01.png"/>
+        <img class="silueta" id="frenteSonriendo" src="imagenesSiluetas/ar-dientes-frente-01.png"/>
       </div>
     </div>   
     <div class="row">
@@ -186,7 +194,7 @@
   capture();
   
     // --------------------------------------------
-    let idMConNombreSilueta=new Map([
+     let idMConNombreSilueta=new Map([
     [1,"perfil"],
     [2,"serio"],
     [3,"caraSonriendo"],
@@ -196,6 +204,8 @@
     [7,"frenteSonriendo"],
     [8,"cerradoIzq"],
     ]);
+
+    // let idMConNombreSilueta = new Map([1,"ar-perfil-01"],[2,"ar-boca-cerrada-01"],[3,"ar-boca-sonrisa-01"],[4,"ar-maxilar-sup-01"],[5,"ar-maxilar-inf-01"],[6,"ar-dientes-perf-d"],[7,"ar-dientes-frente-01"],[8,"ar-dientes-perf-iz"]);
 
     function asignarSiluetaCorrespondiente(){
       var idImagen = parseInt(localStorage.getItem("idImagen"));
