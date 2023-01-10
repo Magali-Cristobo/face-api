@@ -22,14 +22,14 @@
         <div class="w-100"></div>
         <div class="row">
             <div class="col col-sm-12 col-md-4 columna" id="4"><img class="imagen" id="imagen4" src="./fondos/sup.jpg" onclick="openImg(4)"></div>
-            <div class="col col-sm-12 col-md-4 columna" ><img class="imagen" id="imagen9" src="./fondos/bocaAbierta.jpg" onclick="openImg(9)"></div>
-            <div class="col col-sm-12 col-md-4 columna" id="5"><img class="imagen" id="imagen5" src="./fondos/inferior.jpg" onclick="openImg(5)"></div>
+            <div class="col col-sm-12 col-md-4 columna" id="5"><img class="imagen" id="imagen5" src="./fondos/bocaAbierta.jpg" onclick="openImg(5)"></div>
+            <div class="col col-sm-12 col-md-4 columna" id="6"><img class="imagen" id="imagen6" src="./fondos/inferior.jpg" onclick="openImg(6)"></div>
         </div>
         <div class="w-100"></div>
         <div class="row">
-            <div class="col col-sm-12 col-md-4 columna" id="6"><img class="imagen"  id="imagen6" src="./fondos/bocaDer.jpg" onclick="openImg(6)"></div>
-            <div class="col col-sm-12 col-md-4 columna" id="7"><img class="imagen" id="imagen7" src="./fondos/dientesFrente.jpg" onclick="openImg(7)"></div>
-            <div class="col col-sm-12 col-md-4 columna" id="8"><img class="imagen" id="imagen8" src="./fondos/bocaIzq.jpg" onclick="openImg(8)"></div>
+            <div class="col col-sm-12 col-md-4 columna" id="7"><img class="imagen"  id="imagen7" src="./fondos/bocaDer.jpg" onclick="openImg(7)"></div>
+            <div class="col col-sm-12 col-md-4 columna" id="8"><img class="imagen" id="imagen8" src="./fondos/dientesFrente.jpg" onclick="openImg(8)"></div>
+            <div class="col col-sm-12 col-md-4 columna" id="9"><img class="imagen" id="imagen9" src="./fondos/bocaIzq.jpg" onclick="openImg(9)"></div>
         </div>
         <div class="row">
             <div class="col col-sm-12 col-md-4  columna divBoton" ><button type="button" id="botonDescargar" class="boton btn btn-success" data-bs-toggle="modal" data-bs-target="#modalFinalizar" style="display: none;">Finalizar</button></div>
@@ -91,6 +91,7 @@
     <script>
         function openImg(id){
             localStorage.setItem("idImagen",id);
+            console.log(id);
             if (document.getElementById(id).getElementsByTagName("img")[0].src.substring(0, 4)!="http"){ //si ya saco la foto que vaya a editar
                 window.location.href = "http://localhost:3000/editar"; 
             }
@@ -125,7 +126,7 @@
                 i++;
             }
             localStorage.setItem("cantImagenes",cantImagenes);
-            if(cantImagenes == 8){
+            if(cantImagenes == 9){
                 document.getElementById("botonDescargar").style.display="block";
                 document.getElementById("4").scrollIntoView();
             }
@@ -139,10 +140,11 @@
         [2,"serio"],
         [3,"caraSonriendo"],
         [4,"maxSuperior"],
-        [5,"maxInferior"],
-        [6,"cerradoDer"],
-        [7,"frenteSonriendo"],
-        [8,"cerradoIzq"],
+        [5,"bocaAbierta"],
+        [6,"maxInferior"],
+        [7,"cerradoDer"],
+        [8,"frenteSonriendo"],
+        [9,"cerradoIzq"],
         ]);
 
         function descargar(){  
@@ -150,7 +152,7 @@
             let bd=document.getElementById("botonDescargar");
             $(".modal-backdrop").removeClass("show");
             i=1;
-            while(i<=8){ 
+            while(i<=9){ 
                 let img=document.getElementById("imagen"+i);
                 let impath=img.getAttribute('src');
                 let fn=getFileName(impath);
