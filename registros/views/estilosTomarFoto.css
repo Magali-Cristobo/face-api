@@ -71,6 +71,13 @@ body {
     display: none;
     width: 23%;
   }
+  #bocaAbierta {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    display: none;
+    width: 25%;
+  }
 
   canvas {
     position: absolute;
@@ -158,6 +165,13 @@ body {
     }
 
     #caraSonriendo{
+      position: absolute;
+      top: 60%;
+      left: 55%;
+      width:50%;
+      display: none;
+    }
+    #bocaAbierta{
       position: absolute;
       top: 60%;
       left: 55%;
